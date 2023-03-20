@@ -1,0 +1,26 @@
+{
+  "name": "galleryeet",
+  "version": "1.0.0",
+  "description": "Personal blog gallery",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "tailwind": "tailwindcss -i ./src/input.css -o ./src/styles.css --watch",
+    "tailwind:build": "tailwindcss -i ./src/input.css -o ./src/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/GTomy/galleryeet.git"
+  },
+  "author": "GTomy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/GTomy/galleryeet/issues"
+  },
+  "homepage": "https://gitlab.com/GTomy/galleryeet#readme",
+  "devDependencies": {
+    "daisyui": "^2.51.4",
+    "tailwindcss": "^3.2.7"
+  }
+}
