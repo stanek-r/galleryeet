@@ -8,8 +8,8 @@
   "scripts": {
     "tailwind": "tailwindcss -i ./src/input.css -o ./src/styles.css --watch",
     "tailwind:build": "tailwindcss -i ./src/input.css -o ./src/styles.css",
-    "format": "prettier --write \"**/*.{js,html}\"",
-    "format-check": "prettier --check \"**/*.{js,html}\""
+    "format": "prettier --write \"./src/**/*.{js,html}\"",
+    "format-check": "prettier --check \"./src/**/*.{js,html}\""
   },
   "repository": {
     "type": "git",
