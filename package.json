@@ -6,8 +6,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "tailwind": "tailwindcss -i ./src/input.css -o ./src/styles.css --watch",
-    "tailwind:build": "tailwindcss -i ./src/input.css -o ./src/styles.css",
+    "tailwind": "tailwindcss -i ./src/input.css -o ./src/styles.v1.css --watch",
+    "tailwind:build": "tailwindcss -i ./src/input.css -o ./src/styles.v1.css",
+    "tailwind:build:prod": "tailwindcss -i ./src/input.css -o ./src/styles.v1.css --minify",
     "format": "prettier --write \"./src/**/*.{js,html}\"",
     "format-check": "prettier --check \"./src/**/*.{js,html}\""
   },
