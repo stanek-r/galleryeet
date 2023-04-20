@@ -6,11 +6,11 @@
     "lib": "lib"
   },
   "scripts": {
-    "tailwind": "tailwindcss -i ./src/input.css -o ./src/styles.v1.css --watch",
-    "tailwind:build": "tailwindcss -i ./src/input.css -o ./src/styles.v1.css",
-    "tailwind:build:prod": "tailwindcss -i ./src/input.css -o ./src/styles.v1.css --minify",
-    "format": "prettier --write \"./src/**/*.{js,html}\"",
-    "format-check": "prettier --check \"./src/**/*.{js,html}\""
+    "tailwind": "tailwindcss -i ./src/input.css -o ./src/tailwind.v1.css --watch",
+    "tailwind:build": "tailwindcss -i ./src/input.css -o ./src/tailwind.v1.css",
+    "tailwind:build:prod": "tailwindcss -i ./src/input.css -o ./src/tailwind.v1.css --minify",
+    "format": "prettier --write \"./src/**/*.{js,html,php}\"",
+    "format-check": "prettier --check \"./src/**/*.{js,html,php}\""
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://gitlab.com/GTomy/galleryeet#readme",
   "devDependencies": {
+    "@prettier/plugin-php": "^0.19.4",
     "daisyui": "^2.51.4",
     "prettier": "2.8.5",
     "tailwindcss": "^3.2.7"
