@@ -1,14 +1,14 @@
 <?php
 include 'connect.php'; ?>
 
-<?php if (isset($_GET['name']) && $_GET['name'] != '.php') { ?>
+<?php if (isset($_GET['name']) && $_GET['name'] != '.php') {
 
-            <?php
-            $count = 0;
-            $sql = "SELECT * FROM gallery where name = '" . $_GET['name'] . "' LIMIT 1";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-              if ($row = $result->fetch_assoc()) { ?>
+  $name = $conn->real_escape_string($_GET['name']);
+  $count = 0;
+  $sql = "SELECT * FROM gallery where name = '" . $name . "' LIMIT 1";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    if ($row = $result->fetch_assoc()) { ?>
 <!DOCTYPE html>
 <html lang="cs" data-theme="corporate">
 <head>
@@ -137,12 +137,14 @@ include 'connect.php'; ?>
                             </div>
                         </a>
                         <?php }}
-            }
-            ?>
+  }
+  ?>
         </div>
     </div>
     <!-- End GALLERY section -->
-    <?php } else { ?>
+    <?php
+} else {
+   ?>
 <!DOCTYPE html>
 <html lang="cs" data-theme="corporate">
 <head>
@@ -282,7 +284,8 @@ include 'connect.php'; ?>
       }
     }
     if ($i != 0) { ?></div><?php }
-    } ?>
+
+} ?>
 <!-- End POSTS section -->
 
 <!-- Start Footer section -->

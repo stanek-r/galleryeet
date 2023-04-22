@@ -2,7 +2,8 @@
 include 'connect.php'; ?>
 
 <?php if (isset($_GET['name']) && $_GET['name'] != '.php') {
-  $sql = "SELECT * FROM posts where name = '" . $_GET['name'] . "' LIMIT 1";
+  $name = $conn->real_escape_string($_GET['name']);
+  $sql = "SELECT * FROM posts where name = '" . $name . "' LIMIT 1";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     if ($row = $result->fetch_assoc()) { ?>
@@ -115,6 +116,38 @@ include 'connect.php'; ?>
                 <?php echo $row['text']; ?>
             </div>
             <!-- End POST section -->
+
+<div class="divider w-[1024px] max-w-full mx-auto mt-10">Komentáře:</div>
+<form action="/send-comment.php" method="post">
+<div class="flex flex-col gap-y-3 w-[1024px] max-w-full mx-auto px-6 mt-10">
+        <input type="text" name="name" placeholder="Jméno (alespoň 5 znaků)" aria-label="Jméno" minlength="5" class="input input-bordered w-full">
+        <textarea type="text" name="text" placeholder="Text komentáře (alespoň 10 znaků)" minlength="10" aria-label="Text komentáře" class="textarea textarea-bordered w-full resize-none" rows="5"></textarea>
+        <input type="text" name="returnpost" aria-label="returnpost" value="<?php echo $row['name']; ?>" class="hidden">
+    <button type="submit" class="btn">Odeslat komentář</button>
+</div>
+</form>
+<div class="divider w-[1024px] max-w-full mx-auto mt-10"></div>
+<div class="flex flex-col gap-y-3 w-[1024px] max-w-full mx-auto px-6 mt-10">
+    <?php
+    $sql = "SELECT * FROM comments WHERE name = '" . $name . "' ORDER BY created DESC";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) { ?>
+        <div class="chat chat-start">
+            <div class="chat-header">
+                <?php echo $row['autor']; ?>
+                <time class="text-xs opacity-50"><?php echo date_format(
+                  date_create($row['created']),
+                  'd.m.Y'
+                ); ?></time>
+            </div>
+            <div class="chat-bubble max-w-full mt-1"><?php echo $row['text']; ?></div>
+        </div>
+    <?php }
+    }
+    ?>
+</div>
+
             <?php }
   }
 } else {
