@@ -31,7 +31,7 @@ include 'connect.php'; ?>
     <meta name="keywords" content="Cestování, Fotografování, Fotografie, Cestvní tipy, Fotografické techniky, Blog, Turistika" />
     <meta name="author" content="GTomy" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://galleryeet.net" />
+    <link rel="canonical" href="https://galleryeet.net/gallery/<?php echo $row['name']; ?>" />
 
     <link rel="stylesheet" type="text/css" href="/tailwind.v1.css" />
 </head>
@@ -177,7 +177,7 @@ include 'connect.php'; ?>
     <meta name="keywords" content="Cestování, Fotografování, Fotografie, Cestvní tipy, Fotografické techniky, Blog, Turistika" />
     <meta name="author" content="GTomy" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://galleryeet.net" />
+    <link rel="canonical" href="https://galleryeet.net/gallery" />
 
     <link rel="stylesheet" type="text/css" href="/tailwind.v1.css" />
 </head>
