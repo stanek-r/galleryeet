@@ -1,3 +1,5 @@
+<?php
+include 'connect.php'; ?>
 <!DOCTYPE html>
 <html lang="cs" data-theme="corporate">
   <head>
@@ -7,9 +9,9 @@
       name="description"
       content="Cestovní fotografický blog plný inspirace, tipů a triků pro pořizování nezapomenutelných fotografií ze světových destinací. Objevujeme nová místa, hledáme zajímavé kompozice a umělecké nápady na fotografování."
     />
-    <meta name="keywords" content="Cestování, Fotografování, Blog" />
+    <meta name="keywords" content="Cestování, Fotografování, Fotografie, Cestvní tipy, Fotografické techniky, Blog, Turistika" />
     <meta name="author" content="GTomy" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />e
 
     <meta property="og:title" content="GallerYeet" />
     <meta
@@ -18,7 +20,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://galleryeet.net" />
-    <meta property="og:image" content="https://galleryeet.net/images/banner1.jpg" />
+    <meta property="og:image" content="https://galleryeet.net/images/banner1.webp" />
 
     <link rel="canonical" href="https://galleryeet.net" />
 
@@ -88,7 +90,7 @@
         <!--        <div class="dropdown dropdown-end">-->
         <!--            <label tabindex="0" class="btn btn-ghost btn-circle avatar">-->
         <!--                <div class="w-10 rounded-full">-->
-        <!--                    <img src="/images/stock-user.jpg" alt="Profile image" />-->
+        <!--                    <img src="/images/stock-user.webp" alt="Profile image" />-->
         <!--                </div>-->
         <!--            </label>-->
         <!--            <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">-->
@@ -121,19 +123,19 @@
     <!-- Start CAROUSEL section -->
     <div class="w-[1536px] max-w-full mx-auto mt-10 h-96 carousel carousel-center rounded-box">
       <div id="item1" class="carousel-item w-full">
-        <img src="/images/banner1.jpg" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner1.webp" class="w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item2" class="carousel-item w-full">
-        <img src="/images/banner2.jpg" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner2.webp" class="w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item3" class="carousel-item w-full">
-        <img src="/images/banner3.jpg" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner3.webp" class="w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item4" class="carousel-item w-full">
-        <img src="/images/banner4.jpg" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner4.webp" class="w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item5" class="carousel-item w-full">
-        <img src="/images/banner5.jpg" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner5.webp" class="w-full object-cover" alt="Banner 1" />
       </div>
     </div>
     <div class="flex justify-center w-full pt-2 gap-2">
@@ -186,8 +188,95 @@
     </div>
     <!-- End INFO section -->
 
+    <!-- Start POSTS section -->
+    <h2 class="w-[1024px] mt-10 max-w-full mx-auto px-4 text-4xl">Nejnovější příspěvky</h2>
+    <div class="flex flex-col md:flex-row gap-x-10 gap-y-10 w-[1024px] max-w-full mx-auto px-6 mt-8">
+    <?php
+    $sql = 'SELECT * FROM posts ORDER BY created DESC LIMIT 3';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) { ?>
+      <a href="/posts/<?php echo $row['name']; ?>"
+         class="card w-full md:w-96 bg-base-100 shadow-xl hover:scale-105">
+        <div class="card-body">
+          <h3 class="card-title"><?php echo $row['title']; ?></h3>
+          <p><?php echo $row['subtitle']; ?></p>
+          <div class="card-actions justify-end mt-2">
+            <?php
+            if (
+              $row['created'] > date('Y-m-d', strtotime('-1 week'))
+            ) { ?><div class="badge badge-secondary">Nový</div><?php }
+            $tags = explode('#', $row['tags']);
+            foreach ($tags as $tag) { ?>
+              <div class="badge badge-outline"><?php echo $tag; ?></div>
+              <?php }
+            ?>
+          </div>
+        </div>
+      </a>
+      <?php }
+    }
+    ?>
+      </div>
+    <!-- End POSTS section -->
+
+    <!-- Start BANNER section -->
+    <a class="flex mt-10 h-96 w-screen relative hover:opacity-90" href="/about">
+      <img data-src="/photos/amsterdam-2022/35.jpg" alt="Amsterdam 2022 photo 35" class="lazy w-full h-96 object-cover" />
+      <div class="absolute w-full h-full flex flex-col gap-y-3 text-white justify-center items-center ">
+        <h2 class="text-6xl font-semibold">O nás</h2>
+        <p class="text-2xl text-center">Zjistěte více o našem cestování a kdo jsme</p>
+      </div>
+    </a>
+    <!-- End BANNER section -->
+
+    <!-- Start GALLERIES section -->
+    <h2 class="w-[1024px] mt-10 max-w-full mx-auto px-4 text-4xl">Nejnovější galerie</h2>
+    <div class="flex flex-col md:flex-row gap-x-10 gap-y-10 w-[1024px] max-w-full mx-auto px-6 mt-8">
+      <?php
+      $sql = 'SELECT * FROM gallery ORDER BY created DESC LIMIT 3';
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) { ?>
+          <a href="/gallery/<?php echo $row['name']; ?>"
+             class="card w-full md:w-96 bg-base-100 shadow-xl hover:scale-105">
+            <img data-src="/images/<?php echo $row['photo']; ?>" alt="<?php echo $row[
+  'photo'
+]; ?>" class="lazy min-h-[150px]" />
+            <div class="card-body">
+              <h3 class="card-title">
+                <?php
+                echo $row['title'];
+                if (
+                  $row['created'] > date('Y-m-d', strtotime('-1 week'))
+                ) { ?><div class="badge badge-secondary">NOVÝ</div><?php }
+                ?>
+              </h3>
+              <p><?php echo $row['subtitle']; ?></p>
+            </div>
+          </a>
+          <?php }
+      }
+      ?>
+    </div>
+    <!-- End GALLERIES section -->
+
+    <!-- Start PHOTO section -->
+    <div class="w-screen grid grid-cols-2 md:grid-cols-4 mt-10">
+      <?php for ($i = 179; $i < 187; $i++) { ?>
+        <a href="/photos/amsterdam-2022/<?php echo $i; ?>.jpg" target="_blank" class="flex">
+          <img
+              alt="Amsterdam 2022 photo <?php echo $i; ?>"
+              class="lazy w-full min-h-[130px] h-auto hover:opacity-90"
+              data-src="/photos/amsterdam-2022-min/<?php echo $i; ?>.jpg"
+          />
+        </a>
+        <?php } ?>
+    </div>
+    <!-- End PHOTO section -->
+
     <!-- Start Footer section -->
-    <footer class="footer max-md:footer-center items-center mt-10 p-4 bg-neutral text-neutral-content">
+    <footer class="footer max-md:footer-center items-center p-4 bg-neutral text-neutral-content">
       <div class="items-center grid-flow-col">
         <svg
           width="36"
@@ -205,29 +294,31 @@
         <p>Copyright © 2023 - GTomy</p>
       </div>
       <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-        <a href="https://twitter.com/GallerYeet" target="_blank">
+        <a href="https://twitter.com/GallerYeet" target="_blank" aria-label="Twitter">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
             <path
-              d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
             ></path>
           </svg>
         </a>
-        <a href="https://www.youtube.com/@GallerYeet" target="_blank">
+        <a href="https://www.youtube.com/@GallerYeet" target="_blank" aria-label="Youtube">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
             <path
-              d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
+                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
             ></path>
           </svg>
         </a>
-        <a href="https://www.facebook.com/galleryeet" target="_blank">
+        <a href="https://www.facebook.com/galleryeet" target="_blank" aria-label="Facebook">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
             <path
-              d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
             ></path>
           </svg>
         </a>
       </div>
     </footer>
     <!-- End Footer section -->
+
+    <script src="/lazy-load.js"></script>
   </body>
 </html>
