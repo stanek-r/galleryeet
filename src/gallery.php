@@ -12,6 +12,16 @@ include 'connect.php'; ?>
 <!DOCTYPE html>
 <html lang="cs" data-theme="corporate">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDETSWDQLP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZDETSWDQLP');
+    </script>
+
     <meta charset="UTF-8" />
     <title>GallerYeet - <?php echo $row['title']; ?></title>
     <meta
@@ -148,6 +158,16 @@ include 'connect.php'; ?>
 <!DOCTYPE html>
 <html lang="cs" data-theme="corporate">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDETSWDQLP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZDETSWDQLP');
+    </script>
+
     <meta charset="UTF-8" />
     <title>GallerYeet - Galerie</title>
     <meta

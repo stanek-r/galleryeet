@@ -3,6 +3,16 @@ include 'connect.php'; ?>
 <!DOCTYPE html>
 <html lang="cs" data-theme="corporate">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDETSWDQLP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZDETSWDQLP');
+    </script>
+
     <meta charset="UTF-8" />
     <title>GallerYeet</title>
     <meta
@@ -11,7 +21,7 @@ include 'connect.php'; ?>
     />
     <meta name="keywords" content="Cestování, Fotografování, Fotografie, Cestvní tipy, Fotografické techniky, Blog, Turistika" />
     <meta name="author" content="GTomy" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />e
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta property="og:title" content="GallerYeet" />
     <meta
