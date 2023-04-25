@@ -133,19 +133,19 @@ include 'connect.php'; ?>
     <!-- Start CAROUSEL section -->
     <div class="w-[1536px] max-w-full mx-auto mt-10 h-96 carousel carousel-center rounded-box">
       <div id="item1" class="carousel-item w-full">
-        <img src="/images/banner1.webp" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner1.webp" class="w-[1536px] max-w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item2" class="carousel-item w-full">
-        <img src="/images/banner2.webp" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner2.webp" class="w-[1536px] max-w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item3" class="carousel-item w-full">
-        <img src="/images/banner3.webp" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner3.webp" class="w-[1536px] max-w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item4" class="carousel-item w-full">
-        <img src="/images/banner4.webp" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner4.webp" class="w-[1536px] max-w-full object-cover" alt="Banner 1" />
       </div>
       <div id="item5" class="carousel-item w-full">
-        <img src="/images/banner5.webp" class="w-full object-cover" alt="Banner 1" />
+        <img src="/images/banner5.webp" class="w-[1536px] max-w-full object-cover" alt="Banner 1" />
       </div>
     </div>
     <div class="flex justify-center w-full pt-2 gap-2">
