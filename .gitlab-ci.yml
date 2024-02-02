@@ -1,0 +1,43 @@
+image: node:18.17-bullseye
+
+stages:
+  - lint-check
+  - audit
+  - build
+  - deploy
+
+before_script:
+  - yarn install --frozen-lockfile
+
+lint-check:
+  stage: lint-check
+  script:
+    - yarn run lint:check
+  only:
+    - main
+    - merge_requests
+
+audit:
+  stage: audit
+  allow_failure: true
+  script:
+    - yarn npm audit --severity high
+  only:
+    - main
+    - merge_requests
+
+build:
+  stage: build
+  script:
+    - yarn run build
+  only:
+    - merge_requests
+
+#deploy-prod:
+#  stage: deploy
+#  script:
+#    - yarn run build
+#  after_script:
+#    - curl -X POST "$CLOUDFLARE_DEPLOY_HOOK"
+#  only:
+#    - main
