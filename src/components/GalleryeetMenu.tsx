@@ -1,10 +1,5 @@
-import { Menu,  MenuLink } from 'gtomy-lib';
+import { Menu } from 'gtomy-lib';
 
 export function GalleryeetMenu() {
-
-  return (
-    <Menu>
-      <MenuLink to="/">Home</MenuLink>
-    </Menu>
-  );
+  return <Menu></Menu>;
 }

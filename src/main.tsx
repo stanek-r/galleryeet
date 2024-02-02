@@ -7,8 +7,6 @@ import { initGTomyLib } from 'gtomy-lib';
 initGTomyLib({
   appName: 'galleryeet',
   appDisplayName: 'GallerYeet',
-  authUrl: 'https://auth.gtomy.net',
-  backendUrl: 'https://services.gtomy.net',
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

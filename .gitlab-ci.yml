@@ -33,11 +33,11 @@ build:
   only:
     - merge_requests
 
-#deploy-prod:
-#  stage: deploy
-#  script:
-#    - yarn run build
-#  after_script:
-#    - curl -X POST "$CLOUDFLARE_DEPLOY_HOOK"
-#  only:
-#    - main
+deploy-prod:
+  stage: deploy
+  script:
+    - yarn run build
+  after_script:
+    - curl -X POST "$CLOUDFLARE_DEPLOY_HOOK"
+  only:
+    - main
