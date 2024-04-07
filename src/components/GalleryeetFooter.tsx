@@ -17,6 +17,7 @@ export function GalleryeetFooter() {
       subtitle={t('footer').toString()}
       height="tall"
       showSettings
+      showIcon
       links={[
         {
           header: t('footer.projects'),
@@ -33,8 +34,8 @@ export function GalleryeetFooter() {
         {
           header: t('footer.usefulLinks'),
           links: (
-            <FooterItem as={Link} to="/privacy-policy" target="_blank">
-              {t('footer.privacy')}
+            <FooterItem as={Link} to="/privacy-policy">
+              {t('privacy.title', { ns: 'pages' })}
             </FooterItem>
           ),
         },

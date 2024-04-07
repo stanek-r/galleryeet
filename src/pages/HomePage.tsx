@@ -5,7 +5,7 @@ export function HomePage() {
   const { t } = useTranslation('galleryeet');
 
   return (
-    <div className="flex flex-col gap-16">
+    <div className="flex flex-col items-center gap-16">
       <div className="w-full space-y-2 text-center lg:w-4/5">
         <Typography as="h1" size="7xl" weight="bold">
           {t('title')}
