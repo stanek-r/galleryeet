@@ -12,7 +12,7 @@ initGTomyLib({
   appDisplayName: 'GallerYeet',
   authUrl: 'https://auth.gtomy.net',
   storageUrl: 'https://services.gtomy.net/storage',
-  backendUrl: 'https://services.gtomy.net/other',
+  backendUrl: 'https://services.gtomy.net/other/galleryeet',
   sentryConfig: {
     enabled: import.meta.env.VITE_SENTRY_ENABLED === 'true',
     dsn: import.meta.env.VITE_SENTRY_DSN,

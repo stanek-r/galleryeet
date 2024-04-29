@@ -1,24 +1,22 @@
 image: node:18.17-bullseye
 
 stages:
-  - lint-check
-  - audit
+  - checks
   - build
   - deploy
 
-before_script:
-  - yarn install --frozen-lockfile
-
 lint-check:
-  stage: lint-check
+  stage: checks
+  before_script:
+    - yarn install --immutable
   script:
     - yarn run lint:check
   only:
     - main
     - merge_requests
 
-audit:
-  stage: audit
+audit-check:
+  stage: checks
   allow_failure: true
   script:
     - yarn npm audit --severity high
@@ -28,6 +26,8 @@ audit:
 
 build:
   stage: build
+  before_script:
+    - yarn install --immutable
   script:
     - yarn run build
   only:
@@ -36,8 +36,6 @@ build:
 deploy-prod:
   stage: deploy
   script:
-    - yarn run build
-  after_script:
     - curl -X POST "$CLOUDFLARE_DEPLOY_HOOK"
   only:
     - main
