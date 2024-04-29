@@ -20,10 +20,10 @@ initGTomyLib({
     environment: import.meta.env.VITE_SENTRY_ENVIRONMENT,
     additionalTracePropagationTargets: [],
   },
-  // googleConfig: {
-  //   clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-  //   googleMeasurementId: import.meta.env.VITE_GOOGLE_MEASUREMENT_ID,
-  // },
+  googleConfig: {
+    clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+    googleMeasurementId: import.meta.env.VITE_GOOGLE_MEASUREMENT_ID,
+  },
 });
 
 addTranslationResources('galleryeet', { cs: CS, en: EN });
