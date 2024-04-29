@@ -9,6 +9,15 @@ export function GalleryeetMenu() {
       <MenuItem as={Link} to="/">
         {t('home')}
       </MenuItem>
+      <MenuItem as={Link} to="/gallery">
+        {t('gallery.title')}
+      </MenuItem>
+      <MenuItem as={Link} to="/posts">
+        {t('posts.title')}
+      </MenuItem>
+      <MenuItem as={Link} to="/instax">
+        {t('instax.title')}
+      </MenuItem>
     </Menu>
   );
 }
