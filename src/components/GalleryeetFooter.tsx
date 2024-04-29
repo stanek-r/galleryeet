@@ -14,7 +14,7 @@ export function GalleryeetFooter() {
   return (
     <Footer
       title={t('title')}
-      subtitle={t('footer').toString()}
+      subtitle={t('footer.subtitle')}
       height="tall"
       showSettings
       showIcon
