@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../models/content.dto';
 import { GalleryeetCreateGalleryDto, GalleryeetGalleryDto } from '../../models/gallery.dto';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface CreateGalleryForm {
   contents: MultipleFormFile | null;
@@ -86,24 +86,40 @@ export function CreateGallery() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      <FormTextInput name="title" label="Title" control={control} rules={{ required: true }} />
-      <FormTextareaInput name="description" label="Description" control={control} />
-      <FormFileInput name="contents" label="Contents" control={control} multiple rules={{ required: true }} />
-      <FormFileInput name="thumbnail" label="Thumbnail" control={control} multiple={false} rules={{ required: true }} />
-      {error && <ErrorState error={error} />}
-      <Button type="submit" disabled={submitting} color="primary">
-        Create
-      </Button>
-      <div className="flex flex-col gap-2">
-        {[...(files ?? [])].map((file, index) => (
-          <div key={`${index}-${file.name}`} className="flex justify-between gap-4">
-            <Typography>{index}</Typography>
-            <Typography>{file.name}</Typography>
-            <Typography>{file.size}</Typography>
-          </div>
-        ))}
+    <>
+      <Typography as="h1" size="4xl" weight="bold" className="text-center">
+        Create gallery
+      </Typography>
+      <div>
+        <Button as={Link} to="/admin">
+          Back
+        </Button>
       </div>
-    </form>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <FormTextInput name="title" label="Title" control={control} rules={{ required: true }} />
+        <FormTextareaInput name="description" label="Description" control={control} />
+        <FormFileInput name="contents" label="Contents" control={control} multiple rules={{ required: true }} />
+        <FormFileInput
+          name="thumbnail"
+          label="Thumbnail"
+          control={control}
+          multiple={false}
+          rules={{ required: true }}
+        />
+        {error && <ErrorState error={error} />}
+        <Button type="submit" disabled={submitting} color="primary">
+          Create
+        </Button>
+        <div className="flex flex-col gap-2">
+          {[...(files ?? [])].map((file, index) => (
+            <div key={`${index}-${file.name}`} className="flex justify-between gap-4">
+              <Typography>{index}</Typography>
+              <Typography>{file.name}</Typography>
+              <Typography>{file.size}</Typography>
+            </div>
+          ))}
+        </div>
+      </form>
+    </>
   );
 }
