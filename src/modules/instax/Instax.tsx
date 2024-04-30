@@ -1,6 +1,6 @@
 import { Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
-import { GalleryItem } from '../gallery/Gallery';
+import { GalleryItem } from '../../components/GalleryItem';
 
 export function Instax() {
   const { t } = useTranslation('galleryeet');
