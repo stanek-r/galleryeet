@@ -5,6 +5,8 @@ export interface GalleryeetContentDto {
   userId: string;
   createdAt: string;
   title: string;
+  imageId?: string;
+  videoId?: string;
 }
 
 export interface GalleryeetFullContentDto extends GalleryeetContentDto {

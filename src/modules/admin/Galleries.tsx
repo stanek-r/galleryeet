@@ -1,12 +1,12 @@
-import { Button, ErrorState, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
-import { GalleryeetGalleryDto } from '../../models/gallery.dto';
+import { Button, CloudflareImage, ErrorState, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 export function Galleries() {
   const { t } = useTranslation('galleryeet');
   const { get, delete: deleteRequest } = useRequest();
-  const { QueryWrapper, data, refetch } = useQuery<GalleryeetGalleryDto[]>({
+  const { QueryWrapper, data, refetch } = useQuery<GalleryeetFullGalleryDto[]>({
     queryKey: ['galleryeet', 'galleries'],
     queryFn: () => get('/galleries'),
     fallbackValue: [],
@@ -39,9 +39,12 @@ export function Galleries() {
             .filter((gallery) => gallery.galleryId !== 'instax')
             .map((gallery) => (
               <div key={gallery.galleryId} className="flex items-center justify-between gap-4">
-                <div>
-                  <Typography>{gallery.title}</Typography>
-                  <Typography>{gallery.description}</Typography>
+                <div className="flex gap-4">
+                  <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={64} />
+                  <div>
+                    <Typography>{gallery.title}</Typography>
+                    <Typography>{gallery.description}</Typography>
+                  </div>
                 </div>
                 <div className="flex gap-2">
                   <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
