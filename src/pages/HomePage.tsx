@@ -18,6 +18,7 @@ export function HomePage() {
       <div className="flex w-full flex-col gap-2 text-center lg:w-4/5">
         <Typography size="lg">{t('description')}</Typography>
       </div>
+      <div className="divider"></div>
     </div>
   );
 }

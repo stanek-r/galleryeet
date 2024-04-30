@@ -49,7 +49,7 @@ export function CreateGallery() {
       const image = await uploadImage(file);
       if (image) {
         const content = await post<GalleryeetContentDto>('/content', {
-          title: image.filename,
+          title: file.name,
           imageId: image.id,
         } as GalleryeetCreateContentDto).catch((e) => {
           console.error(e);

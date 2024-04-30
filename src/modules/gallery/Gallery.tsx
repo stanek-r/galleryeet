@@ -3,11 +3,11 @@ import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
 import { Button, CloudflareImage, Typography, useImageDialog, useQuery, useRequest } from 'gtomy-lib';
 import { GalleryeetFullContentDto } from '../../models/content.dto';
 
-interface GalleryItemProps {
+export interface GalleryItemProps {
   content: GalleryeetFullContentDto;
 }
 
-function GalleryItem({ content }: GalleryItemProps) {
+export function GalleryItem({ content }: GalleryItemProps) {
   const { openDialog, DialogElement } = useImageDialog({
     imageId: content.imageId,
     videoId: content.videoId,

@@ -1,5 +1,6 @@
 import { Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
+import { GalleryItem } from '../gallery/Gallery';
 
 export function Instax() {
   const { t } = useTranslation('galleryeet');
@@ -15,12 +16,9 @@ export function Instax() {
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('instax.title')}
         </Typography>
-        {data?.contents.map((content) => (
-          <div key={content.contentId} className="flex gap-4">
-            <Typography>{content.title}</Typography>
-            <Typography>{content.createdAt}</Typography>
-          </div>
-        ))}
+        <div className="flex">
+          {data?.contents.map((content) => <GalleryItem key={content.contentId} content={content} />)}
+        </div>
       </>
     </QueryWrapper>
   );
