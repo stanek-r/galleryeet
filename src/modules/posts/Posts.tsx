@@ -16,6 +16,7 @@ export function Posts() {
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('posts.title')}
         </Typography>
+        {data.length === 0 && <Typography className="text-center">{t('posts.noPosts')}</Typography>}
         {data.map((post) => (
           <div key={post.postId} className="flex gap-4">
             <div>

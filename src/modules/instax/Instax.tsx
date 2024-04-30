@@ -17,7 +17,7 @@ export function Instax() {
           {t('instax.title')}
         </Typography>
         <div className="flex">
-          {data?.contents.map((content) => <GalleryItem key={content.contentId} content={content} />)}
+          {data?.contents.map((content) => <GalleryItem key={content.contentId} content={content} showTitle />)}
         </div>
       </>
     </QueryWrapper>

@@ -8,9 +8,11 @@ export const CS = {
   back: 'Zpět',
   gallery: {
     title: 'Galerie',
+    noGalleries: 'Žádné galerie nebyly nalezeny.',
   },
   posts: {
     title: 'Příspěvky',
+    noPosts: 'Žádné příspěvky nebyly nalezeny.',
   },
   instax: {
     title: 'Instax',

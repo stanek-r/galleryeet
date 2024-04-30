@@ -8,9 +8,11 @@ export const EN = {
   back: 'Back',
   gallery: {
     title: 'Gallery',
+    noGalleries: 'No galleries were found.',
   },
   posts: {
     title: 'Posts',
+    noPosts: 'No posts were found.',
   },
   instax: {
     title: 'Instax',

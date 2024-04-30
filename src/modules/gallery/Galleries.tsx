@@ -1,6 +1,6 @@
-import { Button, CloudflareImage, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { CloudflareImage, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function Galleries() {
   const { t } = useTranslation('galleryeet');
@@ -10,26 +10,30 @@ export function Galleries() {
     queryFn: () => get('/galleries'),
     fallbackValue: [],
   });
+  const navigate = useNavigate();
+
   return (
     <QueryWrapper>
       <>
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('gallery.title')}
         </Typography>
+        {data.length === 0 && <Typography>{t('gallery.noGalleries')}</Typography>}
         {data
           .filter((gallery) => gallery.galleryId !== 'instax')
           .map((gallery) => (
-            <div key={gallery.galleryId} className="flex items-center justify-between gap-4">
-              <div className="flex gap-4">
-                <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={64} />
-                <div>
-                  <Typography>{gallery.title}</Typography>
-                  <Typography>{gallery.description}</Typography>
-                </div>
+            <div
+              key={gallery.galleryId}
+              className="flex cursor-pointer gap-4"
+              onClick={() => navigate(gallery.galleryId)}
+            >
+              <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={64} />
+              <div className="flex flex-col py-2">
+                <Typography size="lg" weight="medium">
+                  {gallery.title}
+                </Typography>
+                <Typography>{gallery.description}</Typography>
               </div>
-              <Button as={Link} to={gallery.galleryId}>
-                {t('view')}
-              </Button>
             </div>
           ))}
       </>
