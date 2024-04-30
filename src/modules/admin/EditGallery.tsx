@@ -55,6 +55,10 @@ export function EditGallery() {
 
   return (
     <>
+      <Typography as="h1" size="4xl" weight="bold" className="text-center">
+        {t('admin.edit')}
+      </Typography>
+      <div className="divider"></div>
       <div>
         <Button as={Link} to="/admin/galleries">
           {t('back')}

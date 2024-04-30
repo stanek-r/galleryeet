@@ -16,8 +16,11 @@ export function Instax() {
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('instax.title')}
         </Typography>
+        <div className="divider"></div>
         <div className="flex">
-          {data?.contents.map((content) => <GalleryItem key={content.contentId} content={content} showTitle />)}
+          {data?.contents.map((content) => (
+            <GalleryItem key={content.contentId} content={content} size="wide" showTitle />
+          ))}
         </div>
       </>
     </QueryWrapper>

@@ -92,6 +92,7 @@ export function CreateGallery() {
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.createGallery')}
       </Typography>
+      <div className="divider"></div>
       <div>
         <Button as={Link} to="/admin">
           {t('back')}

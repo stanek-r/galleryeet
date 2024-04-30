@@ -5,9 +5,10 @@ import { twMerge } from 'tailwind-merge';
 export interface GalleryItemProps {
   content: GalleryeetFullContentDto;
   showTitle?: boolean;
+  size?: 'wide' | 'normal';
 }
 
-export function GalleryItem({ content, showTitle }: GalleryItemProps) {
+export function GalleryItem({ content, showTitle, size = 'normal' }: GalleryItemProps) {
   const { openDialog, DialogElement } = useImageDialog({
     imageId: content.imageId,
     videoId: content.videoId,
@@ -15,7 +16,12 @@ export function GalleryItem({ content, showTitle }: GalleryItemProps) {
   });
 
   return (
-    <div className="flex h-96 w-1/4 flex-col items-center justify-center p-2">
+    <div
+      className={twMerge(
+        'flex h-96 flex-col items-center justify-center p-2',
+        size === 'normal' ? 'w-full md:w-1/2 lg:w-1/4' : 'w-full lg:w-1/3'
+      )}
+    >
       <DialogElement />
       {content.imageId && (
         <CloudflareImage

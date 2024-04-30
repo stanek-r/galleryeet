@@ -21,6 +21,7 @@ export function Gallery() {
         <Typography size="2xl" weight="medium" className="text-center">
           {data?.description}
         </Typography>
+        <div className="divider"></div>
         <div className="flex">
           {data?.contents.map((content) => <GalleryItem key={content.contentId} content={content} />)}
         </div>

@@ -8,6 +8,7 @@ export function Admin() {
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.title')}
       </Typography>
+      <div className="divider"></div>
       <div className="flex gap-4">
         <Button as={Link} to="galleries">
           {t('admin.galleries')}

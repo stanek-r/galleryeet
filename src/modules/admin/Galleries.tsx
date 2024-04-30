@@ -38,26 +38,29 @@ export function Galleries() {
           {data
             .filter((gallery) => gallery.galleryId !== 'instax')
             .map((gallery) => (
-              <div key={gallery.galleryId} className="flex items-center justify-between gap-4">
-                <div className="flex gap-4">
-                  <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={48} />
-                  <div className="flex flex-col">
-                    <Typography>{gallery.title}</Typography>
-                    <Typography>{gallery.description}</Typography>
+              <>
+                <div className="divider"></div>
+                <div key={gallery.galleryId} className="flex items-center justify-between gap-4">
+                  <div className="flex gap-4">
+                    <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={48} />
+                    <div className="flex flex-col">
+                      <Typography>{gallery.title}</Typography>
+                      <Typography>{gallery.description}</Typography>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
+                      {t('view')}
+                    </Button>
+                    <Button as={Link} to={`/admin/edit-gallery/${gallery.galleryId}`}>
+                      {t('admin.edit')}
+                    </Button>
+                    <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
+                      {t('admin.delete')}
+                    </Button>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
-                    {t('view')}
-                  </Button>
-                  <Button as={Link} to={`/admin/edit-gallery/${gallery.galleryId}`}>
-                    {t('admin.edit')}
-                  </Button>
-                  <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
-                    {t('admin.delete')}
-                  </Button>
-                </div>
-              </div>
+              </>
             ))}
         </>
       </QueryWrapper>
