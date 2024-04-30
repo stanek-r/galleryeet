@@ -13,7 +13,9 @@ export function Galleries() {
   return (
     <QueryWrapper>
       <>
-        <Typography>{t('gallery.title')}</Typography>
+        <Typography as="h1" size="4xl" weight="bold" className="text-center">
+          {t('gallery.title')}
+        </Typography>
         {data.map((gallery) => (
           <div key={gallery.galleryId} className="flex gap-4">
             <div>

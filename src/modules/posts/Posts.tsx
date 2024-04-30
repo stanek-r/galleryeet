@@ -13,7 +13,9 @@ export function Posts() {
   return (
     <QueryWrapper>
       <>
-        <Typography>{t('posts.title')}</Typography>
+        <Typography as="h1" size="4xl" weight="bold" className="text-center">
+          {t('posts.title')}
+        </Typography>
         {data.map((post) => (
           <div key={post.postId} className="flex gap-4">
             <div>
