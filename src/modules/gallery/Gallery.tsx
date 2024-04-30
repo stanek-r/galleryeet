@@ -45,7 +45,9 @@ export function Gallery() {
         <Typography>{data?.title}</Typography>
         <Typography>{data?.description}</Typography>
         <Typography>{data?.createdAt}</Typography>
-        <div className="flex gap-4">{data?.contents.map((content) => <GalleryItem content={content} />)}</div>
+        <div className="flex gap-4">
+          {data?.contents.map((content) => <GalleryItem key={content.contentId} content={content} />)}
+        </div>
       </>
     </QueryWrapper>
   );
