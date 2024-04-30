@@ -9,6 +9,7 @@ import {
   Typography,
   useBlobstorage,
   useRequest,
+  useTranslation,
 } from 'gtomy-lib';
 import { useForm } from 'react-hook-form';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../models/content.dto';
@@ -24,6 +25,7 @@ interface CreateGalleryForm {
 }
 
 export function CreateGallery() {
+  const { t } = useTranslation('galleryeet');
   const { handleSubmit, watch, control } = useForm<CreateGalleryForm>({
     defaultValues: {
       contents: null,
@@ -88,27 +90,33 @@ export function CreateGallery() {
   return (
     <>
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
-        Create gallery
+        {t('admin.createGallery')}
       </Typography>
       <div>
         <Button as={Link} to="/admin">
-          Back
+          {t('back')}
         </Button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <FormTextInput name="title" label="Title" control={control} rules={{ required: true }} />
-        <FormTextareaInput name="description" label="Description" control={control} />
-        <FormFileInput name="contents" label="Contents" control={control} multiple rules={{ required: true }} />
+        <FormTextInput name="title" label={t('admin.inputTitle')} control={control} rules={{ required: true }} />
+        <FormTextareaInput name="description" label={t('admin.description')} control={control} />
+        <FormFileInput
+          name="contents"
+          label={t('admin.contents')}
+          control={control}
+          multiple
+          rules={{ required: true }}
+        />
         <FormFileInput
           name="thumbnail"
-          label="Thumbnail"
+          label={t('admin.thumbnail')}
           control={control}
           multiple={false}
           rules={{ required: true }}
         />
         {error && <ErrorState error={error} />}
         <Button type="submit" disabled={submitting} color="primary">
-          Create
+          {t('admin.create')}
         </Button>
         <div className="flex flex-col gap-2">
           {[...(files ?? [])].map((file, index) => (

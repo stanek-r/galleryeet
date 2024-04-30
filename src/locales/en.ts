@@ -4,6 +4,8 @@ export const EN = {
   description:
     'Welcome to our travel and photography blog! Your guide to the world where adventure meets art. On this blog, I will introduce you to the fascinating world of travel and photography. Together, we will explore endless possibilities on how to capture the beauty, magic, and uniqueness of the places we visit.',
   home: 'Home',
+  view: 'View',
+  back: 'Back',
   gallery: {
     title: 'Gallery',
   },
@@ -15,6 +17,16 @@ export const EN = {
   },
   admin: {
     title: 'Admin',
+    create: 'Create',
+    createGallery: 'Create gallery',
+    galleries: 'Galleries',
+    add: 'Add',
+    delete: 'Delete',
+    inputTitle: 'Title',
+    photo: 'Photo',
+    description: 'Description',
+    thumbnail: 'Thumbnail',
+    contents: 'Contents',
   },
   footer: {
     title: 'GallerYeet',

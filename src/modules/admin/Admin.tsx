@@ -1,18 +1,19 @@
-import { Button, Typography } from 'gtomy-lib';
+import { Button, Typography, useTranslation } from 'gtomy-lib';
 import { Link } from 'react-router-dom';
 
 export function Admin() {
+  const { t } = useTranslation('galleryeet');
   return (
     <>
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
-        Admin
+        {t('admin.title')}
       </Typography>
       <div className="flex gap-4">
         <Button as={Link} to="galleries">
-          Galleries
+          {t('admin.galleries')}
         </Button>
         <Button as={Link} to="create-gallery">
-          Create gallery
+          {t('admin.createGallery')}
         </Button>
       </div>
     </>

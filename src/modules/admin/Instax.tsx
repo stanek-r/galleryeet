@@ -8,6 +8,7 @@ import {
   useBlobstorage,
   useQuery,
   useRequest,
+  useTranslation,
 } from 'gtomy-lib';
 import { Link } from 'react-router-dom';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
@@ -21,6 +22,7 @@ interface AddInstaxPhoto {
 }
 
 export function Instax() {
+  const { t } = useTranslation('galleryeet');
   const { get, delete: deleteRequest, put, post } = useRequest();
   const { QueryWrapper, data, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', 'instax'],
@@ -74,17 +76,23 @@ export function Instax() {
   return (
     <>
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
-        Instax
+        {t('instax.title')}
       </Typography>
       <div>
         <Button as={Link} to="/admin">
-          Back
+          {t('back')}
         </Button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormTextInput control={control} name="title" label="Label" rules={{ required: true }} />
-        <FormFileInput name="photo" label="Photo" control={control} multiple={false} rules={{ required: true }} />
-        <Button type="submit">Add</Button>
+        <FormTextInput control={control} name="title" label={t('admin.inputTitle')} rules={{ required: true }} />
+        <FormFileInput
+          name="photo"
+          label={t('admin.photo')}
+          control={control}
+          multiple={false}
+          rules={{ required: true }}
+        />
+        <Button type="submit">{t('admin.add')}</Button>
       </form>
       {blobstorageError && <ErrorState error={blobstorageError} />}
       {error && <ErrorState error={error} />}
@@ -95,7 +103,7 @@ export function Instax() {
               <Typography>{content.title}</Typography>
               <Typography>{content.createdAt}</Typography>
               <Button onClick={() => deleteContent(content.contentId)} color="error" disabled={submitting}>
-                Delete
+                {t('admin.delete')}
               </Button>
             </div>
           ))}

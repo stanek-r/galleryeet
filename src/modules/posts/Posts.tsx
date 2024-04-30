@@ -21,7 +21,9 @@ export function Posts() {
             <div>
               <Typography>{post.title}</Typography>
             </div>
-            <Button as={Link} to={post.postId}></Button>
+            <Button as={Link} to={post.postId}>
+              {t('view')}
+            </Button>
           </div>
         ))}
       </>

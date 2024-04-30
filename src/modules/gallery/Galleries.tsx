@@ -16,15 +16,19 @@ export function Galleries() {
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('gallery.title')}
         </Typography>
-        {data.map((gallery) => (
-          <div key={gallery.galleryId} className="flex gap-4">
-            <div>
-              <Typography>{gallery.title}</Typography>
-              <Typography>{gallery.description}</Typography>
+        {data
+          .filter((gallery) => gallery.galleryId !== 'instax')
+          .map((gallery) => (
+            <div key={gallery.galleryId} className="flex justify-between gap-4">
+              <div>
+                <Typography>{gallery.title}</Typography>
+                <Typography>{gallery.description}</Typography>
+              </div>
+              <Button as={Link} to={gallery.galleryId}>
+                {t('view')}
+              </Button>
             </div>
-            <Button as={Link} to={gallery.galleryId}></Button>
-          </div>
-        ))}
+          ))}
       </>
     </QueryWrapper>
   );
