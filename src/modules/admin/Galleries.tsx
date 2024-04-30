@@ -38,8 +38,11 @@ export function Galleries() {
           {data
             .filter((gallery) => gallery.galleryId !== 'instax')
             .map((gallery) => (
-              <div key={gallery.galleryId} className="flex justify-between gap-4">
-                <Typography>{gallery.title}</Typography>
+              <div key={gallery.galleryId} className="flex items-center justify-between gap-4">
+                <div>
+                  <Typography>{gallery.title}</Typography>
+                  <Typography>{gallery.description}</Typography>
+                </div>
                 <div className="flex gap-2">
                   <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
                     {t('view')}

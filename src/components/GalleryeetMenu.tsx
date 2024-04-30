@@ -1,4 +1,4 @@
-import { Menu, MenuItem, useTranslation } from 'gtomy-lib';
+import { Menu, MenuItem, useTranslation, withPermission } from 'gtomy-lib';
 import { Link } from 'react-router-dom';
 
 export function GalleryeetMenu() {
@@ -18,6 +18,12 @@ export function GalleryeetMenu() {
       <MenuItem as={Link} to="/instax">
         {t('instax.title')}
       </MenuItem>
+      {withPermission(
+        <MenuItem as={Link} to="/admin">
+          {t('admin.title')}
+        </MenuItem>,
+        'owner'
+      )}
     </Menu>
   );
 }
