@@ -96,7 +96,7 @@ export function CreateGallery() {
         Create
       </Button>
       <div className="flex flex-col gap-2">
-        {[...files].map((file, index) => (
+        {[...(files ?? [])].map((file, index) => (
           <div key={`${index}-${file.name}`} className="flex justify-between gap-4">
             <Typography>{index}</Typography>
             <Typography>{file.name}</Typography>
