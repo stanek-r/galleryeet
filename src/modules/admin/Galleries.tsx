@@ -35,19 +35,24 @@ export function Galleries() {
       <QueryWrapper>
         <>
           {error && <ErrorState error={error} />}
-          {data.map((gallery) => (
-            <div key={gallery.galleryId} className="flex justify-between gap-4">
-              <Typography>{gallery.title}</Typography>
-              <div className="flex gap-2">
-                <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
-                  {t('view')}
-                </Button>
-                <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
-                  {t('admin.delete')}
-                </Button>
+          {data
+            .filter((gallery) => gallery.galleryId !== 'instax')
+            .map((gallery) => (
+              <div key={gallery.galleryId} className="flex justify-between gap-4">
+                <Typography>{gallery.title}</Typography>
+                <div className="flex gap-2">
+                  <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
+                    {t('view')}
+                  </Button>
+                  <Button as={Link} to={`/admin/edit-gallery/${gallery.galleryId}`}>
+                    {t('edit')}
+                  </Button>
+                  <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
+                    {t('admin.delete')}
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </>
       </QueryWrapper>
     </>

@@ -27,6 +27,7 @@ export const EN = {
     description: 'Description',
     thumbnail: 'Thumbnail',
     contents: 'Contents',
+    edit: 'Edit',
   },
   footer: {
     title: 'GallerYeet',

@@ -17,6 +17,17 @@ export const CS = {
   },
   admin: {
     title: 'Admin',
+    create: 'Vytvořit',
+    createGallery: 'Vytvořit galerii',
+    galleries: 'Galerie',
+    add: 'Přidat',
+    delete: 'Smazat',
+    inputTitle: 'Nadpis',
+    photo: 'Fotka',
+    description: 'Popis',
+    thumbnail: 'Thumbnail',
+    contents: 'Obsah',
+    edit: 'Upravit',
   },
   footer: {
     title: 'GallerYeet',
