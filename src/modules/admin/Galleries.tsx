@@ -51,7 +51,7 @@ export function Galleries() {
                     {t('view')}
                   </Button>
                   <Button as={Link} to={`/admin/edit-gallery/${gallery.galleryId}`}>
-                    {t('edit')}
+                    {t('admin.edit')}
                   </Button>
                   <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
                     {t('admin.delete')}

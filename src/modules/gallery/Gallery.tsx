@@ -10,7 +10,7 @@ interface GalleryItemProps {
 function GalleryItem({ content }: GalleryItemProps) {
   const { openDialog, DialogElement } = useImageDialog({
     imageId: content.imageId,
-    videoId: content.imageId,
+    videoId: content.videoId,
     title: content.title,
   });
 
@@ -18,10 +18,16 @@ function GalleryItem({ content }: GalleryItemProps) {
     <>
       <DialogElement />
       {content.imageId && (
-        <CloudflareImage imageId={content.imageId} className="h-96 cursor-zoom-in" onClick={openDialog} />
+        <div className="flex h-96 w-1/4 items-center justify-center p-2">
+          <CloudflareImage
+            imageId={content.imageId}
+            className="h-[368px] max-w-full cursor-zoom-in"
+            onClick={openDialog}
+          />
+        </div>
       )}
       {content.videoId && (
-        <div className="flex h-96 items-center justify-center">
+        <div className="flex h-96 w-1/4 items-center justify-center p-2">
           <Button onClick={openDialog}>Video</Button>
         </div>
       )}
@@ -41,11 +47,13 @@ export function Gallery() {
   return (
     <QueryWrapper>
       <>
-        <Typography>{data?.galleryId}</Typography>
-        <Typography>{data?.title}</Typography>
-        <Typography>{data?.description}</Typography>
-        <Typography>{data?.createdAt}</Typography>
-        <div className="flex gap-4">
+        <Typography as="h1" size="4xl" weight="bold" className="text-center">
+          {data?.title}
+        </Typography>
+        <Typography size="2xl" weight="medium" className="text-center">
+          {data?.description}
+        </Typography>
+        <div className="flex">
           {data?.contents.map((content) => <GalleryItem key={content.contentId} content={content} />)}
         </div>
       </>

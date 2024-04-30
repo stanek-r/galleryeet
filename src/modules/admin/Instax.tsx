@@ -20,7 +20,7 @@ export function Instax() {
     if (data == null) {
       return;
     }
-    await put('/gallery/instax', {
+    await put('/galleries/instax', {
       contentIds: [...data.contents.map((prevContent) => prevContent.contentId), content.contentId],
     }).catch((e) => {
       setError(e);

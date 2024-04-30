@@ -15,6 +15,9 @@ export function Admin() {
         <Button as={Link} to="create-gallery">
           {t('admin.createGallery')}
         </Button>
+        <Button as={Link} to="instax">
+          {t('instax.title')}
+        </Button>
       </div>
     </>
   );

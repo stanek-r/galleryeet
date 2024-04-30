@@ -27,7 +27,7 @@ export function EditGallery() {
     if (data == null) {
       return;
     }
-    await put(`/gallery/${galleryId}`, {
+    await put(`/galleries/${galleryId}`, {
       contentIds: [...data.contents.map((prevContent) => prevContent.contentId), content.contentId],
     }).catch((e) => {
       setError(e);
