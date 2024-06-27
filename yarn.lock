@@ -3387,7 +3387,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.1.3"
     eslint-plugin-react: "npm:^7.34.1"
     eslint-plugin-tailwindcss: "npm:^3.15.1"
-    gtomy-lib: "npm:0.5.5"
+    gtomy-lib: "npm:0.5.8"
     postcss: "npm:^8.4.33"
     prettier: "npm:^3.2.5"
     react: "npm:^18.2.0"
@@ -3624,15 +3624,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gtomy-lib@npm:0.5.5":
-  version: 0.5.5
-  resolution: "gtomy-lib@npm:0.5.5"
+"gtomy-lib@npm:0.5.8":
+  version: 0.5.8
+  resolution: "gtomy-lib@npm:0.5.8"
   dependencies:
     "@cloudflare/stream-react": "npm:^1.9.1"
     "@radix-ui/react-dialog": "npm:^1.0.5"
     "@tanstack/query-sync-storage-persister": "npm:^5.29.0"
     "@tanstack/react-query": "npm:^5.29.2"
     "@tanstack/react-query-persist-client": "npm:^5.29.2"
+    axios: "npm:^1.6.5"
     dayjs: "npm:^1.11.10"
     i18next: "npm:^23.11.2"
     i18next-browser-languagedetector: "npm:^7.2.1"
@@ -3644,7 +3645,6 @@ __metadata:
     "@heroicons/react": ^2.0.14
     "@react-oauth/google": ^0.12.1
     "@sentry/react": ^7.112.2
-    axios: ^1.6.5
     react: ^18.2.0
     react-dom: ^18.2.0
     react-ga4: ^2.1.0
@@ -3660,7 +3660,7 @@ __metadata:
       optional: true
     react-ga4:
       optional: true
-  checksum: 78f2d7ec1364e5c6de0cfc83f547b6545c6e14f3f3c527cf85278c068d5963248a7704ecda1495443fcd58f30713a1685462520e83f674b736e31180f939264b
+  checksum: b63883c07c60b8c998291ad31db7dce91667a383200cb25adfee4a79ffc8e6fae7147363e03702109e5e0805801dcac67fab65c78fd89158db3df6667851c570
   languageName: node
   linkType: hard
 

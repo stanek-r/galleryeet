@@ -2,10 +2,10 @@ import { Footer, FooterItem, FooterSocialItem, useTranslation } from 'gtomy-lib'
 import { Link } from 'react-router-dom';
 
 const PROJECTS = [
-  { name: 'gtomy.net', link: 'https://gtomy.net' },
+  { name: 'GTomy.net', link: 'https://gtomy.net' },
   { name: 'Ikki AI', link: 'https://ikki-ai.net' },
   { name: 'Mythicraft', link: 'https://mythicraft.net' },
-  { name: 'SWITch', link: 'https://swit-ch.live' },
+  // { name: 'SWITch', link: 'https://swit-ch.live' },
 ];
 
 export function GalleryeetFooter() {
