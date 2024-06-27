@@ -29,7 +29,7 @@ export default defineConfig({
         cleanArtifacts: true,
       },
       sourcemaps: {
-        filesToDeleteAfterUpload: ['dist/**/*.map', 'dist/**/*_gtomy-lib-*'],
+        filesToDeleteAfterUpload: ['dist/**/*.map'],
       },
     }),
   ],

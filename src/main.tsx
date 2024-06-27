@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './main.css';
-import { addTranslationResources, initGTomyLib } from 'gtomy-lib';
+import { addTranslationResources, changeLanguage, initGTomyLib } from 'gtomy-lib';
 import { version } from '../package.json';
 import { CS } from './locales/cs';
 import { EN } from './locales/en';
@@ -27,6 +27,7 @@ initGTomyLib({
 });
 
 addTranslationResources('galleryeet', { cs: CS, en: EN });
+changeLanguage('cs');
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
