@@ -3,7 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.tsx",
-    "./node_modules/gtomy-lib/dist/index.js",
+    "./node_modules/gtomy-lib/index.js",
   ],
   theme: {
     extend: {},
