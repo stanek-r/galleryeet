@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './main.css';
-import { addTranslationResources, changeLanguage, initGTomyLib } from 'gtomy-lib';
+import { addTranslationResources, initGTomyLib } from 'gtomy-lib';
 import { version } from '../package.json';
 import { CS } from './locales/cs';
 import { EN } from './locales/en';
+
+import './main.css';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 initGTomyLib({
   appName: 'galleryeet',
@@ -27,7 +29,6 @@ initGTomyLib({
 });
 
 addTranslationResources('galleryeet', { cs: CS, en: EN });
-changeLanguage('cs');
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

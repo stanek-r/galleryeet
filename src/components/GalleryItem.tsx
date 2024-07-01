@@ -13,6 +13,7 @@ export function GalleryItem({ content, showTitle, size = 'normal' }: GalleryItem
     imageId: content.imageId,
     videoId: content.videoId,
     title: content.title,
+    effect: 'blur',
   });
 
   return (
@@ -26,8 +27,9 @@ export function GalleryItem({ content, showTitle, size = 'normal' }: GalleryItem
       {content.imageId && (
         <CloudflareImage
           imageId={content.imageId}
-          className={twMerge('max-w-full cursor-zoom-in', showTitle ? 'h-[332px]' : 'h-[368px]')}
+          className={twMerge('max-w-full cursor-zoom-in object-contain', showTitle ? 'h-[332px]' : 'h-[368px]')}
           onClick={openDialog}
+          srcType="miniature"
         />
       )}
       {content.videoId && <Button onClick={openDialog}>Video</Button>}

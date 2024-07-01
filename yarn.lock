@@ -3387,7 +3387,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.1.3"
     eslint-plugin-react: "npm:^7.34.1"
     eslint-plugin-tailwindcss: "npm:^3.15.1"
-    gtomy-lib: "npm:0.5.8"
+    gtomy-lib: "npm:1.0.0"
     postcss: "npm:^8.4.33"
     prettier: "npm:^3.2.5"
     react: "npm:^18.2.0"
@@ -3624,9 +3624,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gtomy-lib@npm:0.5.8":
-  version: 0.5.8
-  resolution: "gtomy-lib@npm:0.5.8"
+"gtomy-lib@npm:1.0.0":
+  version: 1.0.0
+  resolution: "gtomy-lib@npm:1.0.0"
   dependencies:
     "@cloudflare/stream-react": "npm:^1.9.1"
     "@radix-ui/react-dialog": "npm:^1.0.5"
@@ -3660,7 +3660,7 @@ __metadata:
       optional: true
     react-ga4:
       optional: true
-  checksum: b63883c07c60b8c998291ad31db7dce91667a383200cb25adfee4a79ffc8e6fae7147363e03702109e5e0805801dcac67fab65c78fd89158db3df6667851c570
+  checksum: 1967285f1ea07e83d6d9903962731917fa3df9ff07fb48b62ecd5d0e7dce7a54af529f891379cb4a1f661b13042c7e8c924f4a99a9a3c69d723ea215aa476691
   languageName: node
   linkType: hard
 
