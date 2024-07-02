@@ -492,12 +492,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^2.0.17":
-  version: 2.0.18
-  resolution: "@heroicons/react@npm:2.0.18"
+"@heroicons/react@npm:2.0.14":
+  version: 2.0.14
+  resolution: "@heroicons/react@npm:2.0.14"
   peerDependencies:
     react: ">= 16"
-  checksum: a8a82c7057eea3ea21cf98c35b08cb600e1c6d1441cec1f1fd992c86b9e21a3322d7926fd9a65dadbfff3679b2c835949acb34c5a627bcff80c29629c30f8043
+  checksum: ce1af486e81dd0a3d382bc536ac8676022bd62bfaacf0276875c32a5d987b90f7adab803b287020a51ae7455911eba5a9053cee8d51c6ec2e7123d21a6d90830
   languageName: node
   linkType: hard
 
@@ -3367,7 +3367,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "galleryeet@workspace:."
   dependencies:
-    "@heroicons/react": "npm:^2.0.17"
+    "@heroicons/react": "npm:2.0.14"
     "@react-oauth/google": "npm:^0.12.1"
     "@sentry/react": "npm:^7.112.2"
     "@sentry/vite-plugin": "npm:^2.16.1"
