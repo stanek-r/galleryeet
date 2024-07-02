@@ -1,6 +1,8 @@
 import { Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
 import { GalleryItem } from '../../components/GalleryItem';
+import { useMemo } from 'react';
+import dayjs from 'dayjs';
 
 export function Instax() {
   const { t } = useTranslation('galleryeet');
@@ -10,6 +12,13 @@ export function Instax() {
     queryFn: () => get('/galleries/instax'),
     fallbackValue: null,
   });
+  const contents = useMemo(() => {
+    if (data == null) {
+      return [];
+    }
+    return data.contents.sort((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
+  }, [data]);
+
   return (
     <QueryWrapper>
       <>
@@ -18,7 +27,7 @@ export function Instax() {
         </Typography>
         <div className="divider"></div>
         <div className="flex">
-          {data?.contents.map((content) => (
+          {contents.map((content) => (
             <GalleryItem key={content.contentId} content={content} size="wide" showTitle />
           ))}
         </div>
