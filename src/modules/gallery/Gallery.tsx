@@ -17,7 +17,7 @@ export function Gallery() {
     if (data == null) {
       return [];
     }
-    return data.contents.sort((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
+    return data.contents.sort((a, b) => dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix());
   }, [data]);
 
   return (

@@ -1,7 +1,8 @@
 import { Button, CloudflareImage, ErrorState, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import dayjs from 'dayjs';
 
 export function Galleries() {
   const { t } = useTranslation('galleryeet');
@@ -12,6 +13,14 @@ export function Galleries() {
     fallbackValue: [],
   });
   const [error, setError] = useState<any>(null);
+  const galleries = useMemo(() => {
+    if (data == null) {
+      return [];
+    }
+    return data
+      .sort((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix())
+      .filter((gallery) => gallery.galleryId !== 'instax');
+  }, [data]);
 
   const deleteGallery = (galleryId: string) => {
     deleteRequest(`/galleries/${galleryId}`)
@@ -35,33 +44,31 @@ export function Galleries() {
       <QueryWrapper>
         <>
           {error && <ErrorState error={error} />}
-          {data
-            .filter((gallery) => gallery.galleryId !== 'instax')
-            .map((gallery) => (
-              <>
-                <div className="divider"></div>
-                <div key={gallery.galleryId} className="flex items-center justify-between gap-4">
-                  <div className="flex gap-4">
-                    <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={48} />
-                    <div className="flex flex-col">
-                      <Typography>{gallery.title}</Typography>
-                      <Typography>{gallery.description}</Typography>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
-                      {t('view')}
-                    </Button>
-                    <Button as={Link} to={`/admin/edit-gallery/${gallery.galleryId}`}>
-                      {t('admin.edit')}
-                    </Button>
-                    <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
-                      {t('admin.delete')}
-                    </Button>
+          {galleries.map((gallery) => (
+            <>
+              <div className="divider"></div>
+              <div key={gallery.galleryId} className="flex items-center justify-between gap-4">
+                <div className="flex gap-4">
+                  <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={48} />
+                  <div className="flex flex-col">
+                    <Typography>{gallery.title}</Typography>
+                    <Typography>{gallery.description}</Typography>
                   </div>
                 </div>
-              </>
-            ))}
+                <div className="flex gap-2">
+                  <Button as={Link} to={`/gallery/${gallery.galleryId}`}>
+                    {t('view')}
+                  </Button>
+                  <Button as={Link} to={`/admin/edit-gallery/${gallery.galleryId}`}>
+                    {t('admin.edit')}
+                  </Button>
+                  <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
+                    {t('admin.delete')}
+                  </Button>
+                </div>
+              </div>
+            </>
+          ))}
         </>
       </QueryWrapper>
     </>

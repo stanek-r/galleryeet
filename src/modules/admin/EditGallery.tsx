@@ -3,7 +3,8 @@ import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
 import { Button, ErrorState, SingleFormFile, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetContentDto } from '../../models/content.dto';
 import { AddPhoto } from './AddPhoto';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import dayjs from 'dayjs';
 
 export interface AddPhotoForm {
   title: string | null;
@@ -22,6 +23,13 @@ export function EditGallery() {
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const contents = useMemo(() => {
+    if (data == null) {
+      return [];
+    }
+    return data.contents.sort((a, b) => dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix());
+  }, [data]);
 
   const onUpload = async (content: GalleryeetContentDto) => {
     if (data == null) {
@@ -76,7 +84,7 @@ export function EditGallery() {
           <Typography>{data?.description}</Typography>
           <Typography>{data?.createdAt}</Typography>
           <div className="flex flex-col gap-2">
-            {data?.contents.map((content) => (
+            {contents.map((content) => (
               <div key={content.contentId} className="flex justify-between gap-2">
                 <Typography>{content.title}</Typography>
                 <Typography>{content.createdAt}</Typography>

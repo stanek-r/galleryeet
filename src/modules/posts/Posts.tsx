@@ -2,6 +2,7 @@ import { Button, Typography, useQuery, useRequest, useTranslation } from 'gtomy-
 import { Link } from 'react-router-dom';
 import { GalleryeetPostDto } from '../../models/post.dto';
 import dayjs from 'dayjs';
+import { useMemo } from 'react';
 
 export function Posts() {
   const { t } = useTranslation('galleryeet');
@@ -11,19 +12,26 @@ export function Posts() {
     queryFn: () => get('/posts'),
     fallbackValue: [],
   });
+  const posts = useMemo(() => {
+    if (data == null) {
+      return [];
+    }
+    return data.sort((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
+  }, [data]);
+
   return (
     <QueryWrapper>
       <>
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('posts.title')}
         </Typography>
-        {data.length === 0 && (
+        {posts.length === 0 && (
           <>
             <div className="divider"></div>
             <Typography className="text-center">{t('posts.noPosts')}</Typography>
           </>
         )}
-        {data.map((post) => (
+        {posts.map((post) => (
           <>
             <div className="divider"></div>
             <div key={post.postId} className="flex gap-4 p-2 hover:opacity-60">
