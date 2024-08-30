@@ -32,7 +32,7 @@ export function Galleries() {
         {galleries.length === 0 && (
           <>
             <div className="divider"></div>
-            <Typography>{t('gallery.noGalleries')}</Typography>
+            <Typography className="text-center">{t('gallery.noGalleries')}</Typography>
           </>
         )}
         {galleries.map((gallery) => (
