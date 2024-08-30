@@ -16,7 +16,7 @@ export function Posts() {
     if (data == null) {
       return [];
     }
-    return data.sort((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
+    return data.toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
   }, [data]);
 
   return (

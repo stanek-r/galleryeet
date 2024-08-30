@@ -7,7 +7,7 @@ import { AddPhoto } from './AddPhoto';
 
 export function Instax() {
   const { t } = useTranslation('galleryeet');
-  const { get, delete: deleteRequest, put } = useRequest();
+  const { get, delete: deleteRequest, post } = useRequest();
   const { QueryWrapper, data, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', 'instax'],
     queryFn: () => get('/galleries/instax'),
@@ -20,13 +20,15 @@ export function Instax() {
     if (data == null) {
       return;
     }
-    await put('/galleries/instax', {
-      contentIds: [...data.contents.map((prevContent) => prevContent.contentId), content.contentId],
+    setSubmitting(true);
+    await post('/galleries/instax', {
+      contentId: content.contentId,
     }).catch((e) => {
       setError(e);
       return null;
     });
     await refetch();
+    setSubmitting(false);
   };
 
   const deleteContent = async (contentId: string) => {

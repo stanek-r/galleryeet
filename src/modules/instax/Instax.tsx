@@ -16,7 +16,7 @@ export function Instax() {
     if (data == null) {
       return [];
     }
-    return data.contents.sort((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
+    return data.contents.toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
   }, [data]);
 
   return (

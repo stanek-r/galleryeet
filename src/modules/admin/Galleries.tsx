@@ -18,7 +18,7 @@ export function Galleries() {
       return [];
     }
     return data
-      .sort((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix())
+      .toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix())
       .filter((gallery) => gallery.galleryId !== 'instax');
   }, [data]);
 

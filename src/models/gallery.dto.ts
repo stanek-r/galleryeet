@@ -1,5 +1,10 @@
 import { GalleryeetContentDto, GalleryeetFullContentDto } from './content.dto';
 
+export interface GalleryeetGalleryOrderDto {
+  contentId: string;
+  order: number;
+}
+
 export interface GalleryeetGalleryDto {
   galleryId: string;
   createdAt: string;
@@ -9,7 +14,7 @@ export interface GalleryeetGalleryDto {
 
 export interface GalleryeetFullGalleryDto extends GalleryeetGalleryDto {
   thumbnail: GalleryeetContentDto;
-  contents: GalleryeetFullContentDto[];
+  contents: (GalleryeetFullContentDto & GalleryeetGalleryOrderDto)[];
 }
 
 export interface GalleryeetCreateGalleryDto {
