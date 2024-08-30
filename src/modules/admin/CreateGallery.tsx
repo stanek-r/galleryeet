@@ -38,6 +38,8 @@ export function CreateGallery() {
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [uploadCount, setUploadCount] = useState<number>(0);
+  const [totalUploadCount, setTotalUploadCount] = useState<number>(0);
 
   const files = watch('contents.file');
 
@@ -45,20 +47,25 @@ export function CreateGallery() {
     setSubmitting(true);
     const filelist = form.contents!.file;
     const contentList: GalleryeetContentDto[] = [];
+    setUploadCount(0);
+    setTotalUploadCount(filelist.length);
     for (const file of filelist) {
       const image = await uploadImage(file);
-      if (image) {
-        const content = await post<GalleryeetContentDto>('/content', {
-          title: file.name,
-          imageId: image.id,
-        } as GalleryeetCreateContentDto).catch((e) => {
-          console.error(e);
-          return null;
-        });
-        if (content) {
-          contentList.push(content);
-        }
+      if (image == null) {
+        continue;
       }
+      const content = await post<GalleryeetContentDto>('/content', {
+        title: file.name,
+        imageId: image.id,
+      } as GalleryeetCreateContentDto).catch((e) => {
+        console.error(e);
+        return null;
+      });
+      if (content == null) {
+        continue;
+      }
+      contentList.push(content);
+      setUploadCount((prev) => prev + 1);
     }
     const thumbnailImage = await uploadImage(form.thumbnail!.file);
     if (thumbnailImage) {
@@ -119,12 +126,20 @@ export function CreateGallery() {
         <Button type="submit" disabled={submitting} color="primary">
           {t('admin.create')}
         </Button>
+        {totalUploadCount > 0 && (
+          <progress
+            className="progress progress-primary h-12 w-full"
+            value={uploadCount}
+            max={totalUploadCount}
+          ></progress>
+        )}
         <div className="flex flex-col gap-2">
           {[...(files ?? [])].map((file, index) => (
             <div key={`${index}-${file.name}`} className="flex justify-between gap-4">
               <Typography>{index}</Typography>
               <Typography>{file.name}</Typography>
               <Typography>{file.size}</Typography>
+              <Typography>Uploaded: {uploadCount > index}</Typography>
             </div>
           ))}
         </div>
