@@ -128,7 +128,7 @@ export function CreateGallery() {
         </Button>
         {totalUploadCount > 0 && (
           <progress
-            className="progress progress-primary h-12 w-full"
+            className="progress progress-primary h-6 w-full"
             value={uploadCount}
             max={totalUploadCount}
           ></progress>
