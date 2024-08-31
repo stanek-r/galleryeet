@@ -34,6 +34,7 @@ export function Gallery() {
             <GalleryItem key={content.contentId} content={content} />
           ))}
         </div>
+        <div className="h-12"></div>
       </>
     </QueryWrapper>
   );

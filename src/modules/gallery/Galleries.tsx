@@ -58,6 +58,7 @@ export function Galleries() {
             </div>
           </>
         ))}
+        <div className="h-12"></div>
       </>
     </QueryWrapper>
   );

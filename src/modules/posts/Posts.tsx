@@ -45,6 +45,7 @@ export function Posts() {
             </div>
           </>
         ))}
+        <div className="h-12"></div>
       </>
     </QueryWrapper>
   );
