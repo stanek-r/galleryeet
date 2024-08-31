@@ -19,23 +19,24 @@ export function Post() {
     fallbackValue: null,
   });
 
-  const contents: (string | GalleryeetContentDto)[] = useMemo(() => {
+  const contents: (string | GalleryeetContentDto[])[] = useMemo(() => {
     if (data == null) {
       return [];
     }
     const splitContent = data.content.split(';;;;;');
-    const ret: (string | GalleryeetContentDto)[] = [];
+    const ret: (string | GalleryeetContentDto[])[] = [];
     for (const ct of splitContent) {
       if (ct.startsWith('content:')) {
         const content = ct.replace('content:', '');
         const splitContent2 = content.split(';');
-        for (const ct2 of splitContent2) {
+        const images = splitContent2.map((ct2) => {
           const imageContent = data.contents.find((c) => c.title === ct2);
           if (imageContent == null) {
-            continue;
+            return null;
           }
-          ret.push(imageContent);
-        }
+          return imageContent;
+        });
+        ret.push(images.filter((ct2) => ct2 != null));
       } else {
         ret.push(ct);
       }
@@ -62,7 +63,13 @@ export function Post() {
               </Markdown>
             );
           }
-          return <GalleryItem key={content.contentId} content={content} size="wide" disableHeightLimit />;
+          return (
+            <div key={index} className="flex flex-wrap">
+              {content.map((c) => (
+                <GalleryItem key={c.contentId} content={c} size="wide" disableHeightLimit />
+              ))}
+            </div>
+          );
         })}
         <div className="divider"></div>
         <div className="h-12"></div>
