@@ -45,6 +45,8 @@ export function CreateGallery() {
 
   const onSubmit = async (form: CreateGalleryForm) => {
     setSubmitting(true);
+    setError(null);
+
     const filelist = form.contents!.file;
     const contentList: GalleryeetContentDto[] = [];
     setUploadCount(0);
@@ -67,6 +69,7 @@ export function CreateGallery() {
       contentList.push(content);
       setUploadCount((prev) => prev + 1);
     }
+
     const thumbnailImage = await uploadImage(form.thumbnail!.file);
     if (thumbnailImage) {
       const thumbnailContent = await post<GalleryeetContentDto>('/content', {

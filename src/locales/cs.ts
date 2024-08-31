@@ -15,6 +15,7 @@ export const CS = {
     title: 'Příspěvky',
     noPosts: 'Žádné příspěvky nebyly nalezeny.',
     homepageLastPosts: 'Nejnovější příspěvky',
+    published: 'Publikováno: ',
   },
   instax: {
     title: 'Instax',

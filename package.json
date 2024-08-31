@@ -1,7 +1,7 @@
 {
   "name": "galleryeet",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,7 +23,9 @@
     "react-ga4": "^2.1.0",
     "react-hook-form": "^7.39.4",
     "react-lazy-load-image-component": "^1.6.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.11.1",
+    "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.3.0",
     "zustand": "^4.5.2"
   },

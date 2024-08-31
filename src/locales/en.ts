@@ -15,6 +15,7 @@ export const EN = {
     title: 'Posts',
     noPosts: 'No posts were found.',
     homepageLastPosts: 'Newest posts',
+    published: 'Published: ',
   },
   instax: {
     title: 'Instax',
@@ -33,6 +34,7 @@ export const EN = {
     description: 'Description',
     thumbnail: 'Thumbnail',
     contents: 'Contents',
+    content: 'Content',
     edit: 'Edit',
   },
   footer: {

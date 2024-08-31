@@ -1,9 +1,9 @@
 import { Button, CloudflareImage, Typography, useImageDialog } from 'gtomy-lib';
-import { GalleryeetFullContentDto } from '../models/content.dto';
+import { GalleryeetContentDto, GalleryeetFullContentDto } from '../models/content.dto';
 import { twMerge } from 'tailwind-merge';
 
 export interface GalleryItemProps {
-  content: GalleryeetFullContentDto;
+  content: GalleryeetFullContentDto | GalleryeetContentDto;
   showTitle?: boolean;
   size?: 'wide' | 'normal';
 }
