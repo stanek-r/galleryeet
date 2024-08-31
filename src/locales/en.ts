@@ -2,7 +2,7 @@ export const EN = {
   title: 'GallerYeet',
   subtitle: 'a place where you can find photos and videos from my travels',
   description:
-    'Welcome to our travel and photography blog! Your guide to the world where adventure meets art. On this blog, I will introduce you to the fascinating world of travel and photography. Together, we will explore endless possibilities on how to capture the beauty, magic, and uniqueness of the places we visit.',
+    "Welcome to our travel and photography blog! Explore travel adventures through individual galleries, posts and a special Instax section. Join the world travels I'm sharing here.",
   home: 'Home',
   view: 'View',
   back: 'Back',
