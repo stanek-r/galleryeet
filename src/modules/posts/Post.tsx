@@ -36,7 +36,7 @@ export function Post() {
       }
     }
     return ret;
-  }, []);
+  }, [data]);
 
   return (
     <QueryWrapper>

@@ -55,7 +55,7 @@ export function HomePage() {
       </div>
       <div className="divider"></div>
       <GalleriesQueryWrapper>
-        <section>
+        <section className="w-full px-4">
           <Typography size="3xl" weight="semibold">
             {t('gallery.homepageLastGalleries')}
           </Typography>
@@ -83,7 +83,7 @@ export function HomePage() {
       </GalleriesQueryWrapper>
       <div className="divider"></div>
       <PostsQueryWrapper>
-        <section>
+        <section className="w-full px-4">
           <Typography size="3xl" weight="semibold">
             {t('posts.homepageLastPosts')}
           </Typography>
@@ -94,8 +94,8 @@ export function HomePage() {
                 to={`/posts/${post.postId}`}
                 className="overflow-hidden rounded-lg shadow-lg hover:opacity-75"
               >
-                <div className="flex gap-2 p-4">
-                  <Typography size="lg" weight="semibold">
+                <div className="flex flex-col gap-1 p-6">
+                  <Typography size="2xl" weight="semibold">
                     {post.title}
                   </Typography>
                   <Typography>{dayjs(post.createdAt).format('D.M.YYYY HH:mm')}</Typography>
