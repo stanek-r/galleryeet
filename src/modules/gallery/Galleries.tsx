@@ -43,7 +43,12 @@ export function Galleries() {
               className="flex cursor-pointer gap-4 p-2 hover:opacity-60"
               onClick={() => navigate(gallery.galleryId)}
             >
-              <CloudflareImage imageId={gallery.thumbnail.imageId!} srcType="miniature" height={64} />
+              <CloudflareImage
+                imageId={gallery.thumbnail.imageId!}
+                srcType="miniature"
+                className="h-[270px]"
+                wrapperClassName="h-[270px]"
+              />
               <div className="flex flex-col py-2">
                 <Typography size="lg" weight="medium">
                   {gallery.title}

@@ -126,6 +126,7 @@ export function CreateGallery() {
         <Button type="submit" disabled={submitting} color="primary">
           {t('admin.create')}
         </Button>
+        <div className="divider"></div>
         {totalUploadCount > 0 && (
           <progress
             className="progress progress-primary h-6 w-full"
@@ -139,7 +140,7 @@ export function CreateGallery() {
               <Typography>{index}</Typography>
               <Typography>{file.name}</Typography>
               <Typography>{file.size}</Typography>
-              <Typography>Uploaded: {uploadCount > index}</Typography>
+              <Typography>{uploadCount > index ? 'Uploaded' : 'Waiting'}</Typography>
             </div>
           ))}
         </div>
