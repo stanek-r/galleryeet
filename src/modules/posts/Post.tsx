@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { Fragment, useMemo } from 'react';
 import { GalleryItem } from '../../components/GalleryItem';
 import './Post.css';
+import { GalleryeetContentDto } from '../../models/content.dto';
 
 export function Post() {
   const { t } = useTranslation('galleryeet');
@@ -18,20 +19,20 @@ export function Post() {
     fallbackValue: null,
   });
 
-  const contents: (string | JSX.Element)[] = useMemo(() => {
+  const contents: (string | GalleryeetContentDto)[] = useMemo(() => {
     if (data == null) {
       return [];
     }
     const splitContent = data.content.split(';;;;;');
-    const ret: (string | JSX.Element)[] = [];
+    const ret: (string | GalleryeetContentDto)[] = [];
     for (const ct of splitContent) {
       if (ct.startsWith('content:')) {
-        const content = ct.replace('content:', '');
+        const content = ct.replace('content:', '').trim();
         const imageContent = data.contents.find((c) => c.title === content);
         if (imageContent == null) {
           continue;
         }
-        ret.push(<GalleryItem key={imageContent.contentId} content={imageContent} size="wide" />);
+        ret.push(imageContent);
       } else {
         ret.push(ct);
       }
@@ -58,7 +59,7 @@ export function Post() {
               </Markdown>
             );
           }
-          return <Fragment key={index}>{content}</Fragment>;
+          return <GalleryItem key={content.contentId} content={content} size="wide" disableHeightLimit />;
         })}
         <div className="divider"></div>
         <div className="h-12"></div>
