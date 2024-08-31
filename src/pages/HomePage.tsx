@@ -1,7 +1,9 @@
-import { CloudflareImage, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { CloudflareImage, Typography, useBreakpoint, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { Corousel } from '../components/Corousel';
 import { GalleryeetGalleryDto } from '../models/gallery.dto';
 import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
+import dayjs from 'dayjs';
 
 export function HomePage() {
   const { t } = useTranslation('galleryeet');
@@ -11,6 +13,16 @@ export function HomePage() {
     queryFn: () => get('/galleries'),
     fallbackValue: [],
   });
+  const { isOverBreakpoint } = useBreakpoint('lg');
+  const galleries = useMemo(() => {
+    if (data == null) {
+      return [];
+    }
+    return data
+      .toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix())
+      .filter((gallery) => gallery.galleryId !== 'instax')
+      .slice(0, isOverBreakpoint ? 4 : 3);
+  }, [data, isOverBreakpoint]);
 
   return (
     <div className="flex flex-col items-center gap-16">
@@ -32,8 +44,8 @@ export function HomePage() {
           <Typography size="3xl" weight="semibold">
             {t('gallery.homepageLastGalleries')}
           </Typography>
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {data.map((gallery) => (
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {galleries.map((gallery) => (
               <Link
                 key={gallery.galleryId}
                 to={`/gallery/${gallery.galleryId}`}
