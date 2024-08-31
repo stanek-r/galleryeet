@@ -1,8 +1,16 @@
-import { Typography, useTranslation } from 'gtomy-lib';
+import { CloudflareImage, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { Corousel } from '../components/Corousel';
+import { GalleryeetGalleryDto } from '../models/gallery.dto';
+import { Link } from 'react-router-dom';
 
 export function HomePage() {
   const { t } = useTranslation('galleryeet');
+  const { get } = useRequest();
+  const { QueryWrapper, data } = useQuery<GalleryeetGalleryDto[]>({
+    queryKey: ['galleryeet', 'galleries'],
+    queryFn: () => get('/galleries'),
+    fallbackValue: [],
+  });
 
   return (
     <div className="flex flex-col items-center gap-16">
@@ -19,6 +27,33 @@ export function HomePage() {
         <Typography size="lg">{t('description')}</Typography>
       </div>
       <div className="divider"></div>
+      <QueryWrapper>
+        <section>
+          <Typography size="3xl" weight="semibold">
+            {t('gallery.homepageLastGalleries')}
+          </Typography>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {data.map((gallery) => (
+              <Link
+                key={gallery.galleryId}
+                to={`/gallery/${gallery.galleryId}`}
+                className="overflow-hidden rounded-lg shadow-lg hover:opacity-75"
+              >
+                <CloudflareImage
+                  imageId={gallery.thumbnail.imageId!}
+                  srcType="miniature"
+                  className="h-48 w-full object-cover"
+                />
+                <div className="p-4">
+                  <Typography size="lg" decoration="underline">
+                    {gallery.title}
+                  </Typography>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </QueryWrapper>
     </div>
   );
 }

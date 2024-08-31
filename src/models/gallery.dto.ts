@@ -10,10 +10,10 @@ export interface GalleryeetGalleryDto {
   createdAt: string;
   title: string;
   description?: string;
+  thumbnail: GalleryeetContentDto;
 }
 
 export interface GalleryeetFullGalleryDto extends GalleryeetGalleryDto {
-  thumbnail: GalleryeetContentDto;
   contents: (GalleryeetFullContentDto & GalleryeetGalleryOrderDto)[];
 }
 

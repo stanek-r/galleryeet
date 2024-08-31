@@ -9,6 +9,7 @@ export const EN = {
   gallery: {
     title: 'Gallery',
     noGalleries: 'No galleries were found.',
+    homepageLastGalleries: 'Last updated galleries',
   },
   posts: {
     title: 'Posts',
