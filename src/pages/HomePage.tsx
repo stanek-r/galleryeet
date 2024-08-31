@@ -4,25 +4,40 @@ import { GalleryeetGalleryDto } from '../models/gallery.dto';
 import { Link } from 'react-router-dom';
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
+import { GalleryeetPostDto } from '../models/post.dto';
 
 export function HomePage() {
   const { t } = useTranslation('galleryeet');
   const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetGalleryDto[]>({
+  const { QueryWrapper: GalleriesQueryWrapper, data: galleriesData } = useQuery<GalleryeetGalleryDto[]>({
     queryKey: ['galleryeet', 'galleries'],
     queryFn: () => get('/galleries'),
     fallbackValue: [],
   });
   const { isOverBreakpoint } = useBreakpoint('lg');
   const galleries = useMemo(() => {
-    if (data == null) {
+    if (galleriesData == null) {
       return [];
     }
-    return data
+    return galleriesData
       .toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix())
       .filter((gallery) => gallery.galleryId !== 'instax')
       .slice(0, isOverBreakpoint ? 4 : 3);
-  }, [data, isOverBreakpoint]);
+  }, [galleriesData, isOverBreakpoint]);
+
+  const { QueryWrapper: PostsQueryWrapper, data: postsData } = useQuery<GalleryeetPostDto[]>({
+    queryKey: ['galleryeet', 'posts'],
+    queryFn: () => get('/posts'),
+    fallbackValue: [],
+  });
+  const posts = useMemo(() => {
+    if (postsData == null) {
+      return [];
+    }
+    return postsData
+      .toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix())
+      .slice(0, isOverBreakpoint ? 4 : 3);
+  }, [postsData, isOverBreakpoint]);
 
   return (
     <div className="flex flex-col items-center gap-16">
@@ -39,7 +54,7 @@ export function HomePage() {
         <Typography size="lg">{t('description')}</Typography>
       </div>
       <div className="divider"></div>
-      <QueryWrapper>
+      <GalleriesQueryWrapper>
         <section>
           <Typography size="3xl" weight="semibold">
             {t('gallery.homepageLastGalleries')}
@@ -65,7 +80,32 @@ export function HomePage() {
             ))}
           </div>
         </section>
-      </QueryWrapper>
+      </GalleriesQueryWrapper>
+      <div className="divider"></div>
+      <PostsQueryWrapper>
+        <section>
+          <Typography size="3xl" weight="semibold">
+            {t('posts.homepageLastPosts')}
+          </Typography>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {posts.map((post) => (
+              <Link
+                key={post.postId}
+                to={`/posts/${post.postId}`}
+                className="overflow-hidden rounded-lg shadow-lg hover:opacity-75"
+              >
+                <div className="flex gap-2 p-4">
+                  <Typography size="lg" weight="semibold">
+                    {post.title}
+                  </Typography>
+                  <Typography>{dayjs(post.createdAt).format('D.M.YYYY HH:mm')}</Typography>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </PostsQueryWrapper>
+      <div className="h-12"></div>
     </div>
   );
 }

@@ -9,10 +9,12 @@ export const CS = {
   gallery: {
     title: 'Galerie',
     noGalleries: 'Žádné galerie nebyly nalezeny.',
+    homepageLastGalleries: 'Nejnovější galerie',
   },
   posts: {
     title: 'Příspěvky',
     noPosts: 'Žádné příspěvky nebyly nalezeny.',
+    homepageLastPosts: 'Nejnovější příspěvky',
   },
   instax: {
     title: 'Instax',
