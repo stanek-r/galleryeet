@@ -71,7 +71,8 @@ export function Post() {
             </div>
           );
         })}
-        <div className="divider"></div>
+        {/*TODO: comments*/}
+        {/*<div className="divider"></div>*/}
         <div className="h-12"></div>
       </>
     </QueryWrapper>
