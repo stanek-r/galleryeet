@@ -46,8 +46,8 @@ export function Galleries() {
               <CloudflareImage
                 imageId={gallery.thumbnail.imageId!}
                 srcType="miniature"
-                className="h-[270px]"
-                wrapperClassName="h-[270px]"
+                className="h-[270px] w-[405px] object-contain"
+                wrapperClassName="h-[270px] w-[405px] object-contain"
               />
               <div className="flex flex-col py-2">
                 <Typography size="lg" weight="medium">

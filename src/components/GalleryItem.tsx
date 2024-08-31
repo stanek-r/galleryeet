@@ -28,7 +28,7 @@ export function GalleryItem({ content, showTitle, size = 'normal' }: GalleryItem
         <CloudflareImage
           imageId={content.imageId}
           className={twMerge('max-w-full cursor-zoom-in object-contain', showTitle ? 'h-[332px]' : 'h-[368px]')}
-          wrapperClassName={twMerge('max-w-full cursor-zoom-in', showTitle ? 'h-[332px]' : 'h-[368px]')}
+          wrapperClassName={twMerge('max-w-full cursor-zoom-in object-contain', showTitle ? 'h-[332px]' : 'h-[368px]')}
           onClick={openDialog}
           srcType="miniature"
         />

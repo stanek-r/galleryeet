@@ -29,7 +29,7 @@ export function Gallery() {
           {data?.description}
         </Typography>
         <div className="divider"></div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {contents.map((content) => (
             <GalleryItem key={content.contentId} content={content} />
           ))}

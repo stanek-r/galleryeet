@@ -26,7 +26,7 @@ export function Instax() {
           {t('instax.title')}
         </Typography>
         <div className="divider"></div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {contents.map((content) => (
             <GalleryItem key={content.contentId} content={content} size="wide" showTitle />
           ))}
