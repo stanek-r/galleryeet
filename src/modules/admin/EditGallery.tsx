@@ -6,6 +6,7 @@ import {
   ErrorState,
   SingleFormFile,
   Typography,
+  useConfirmationDialog,
   useQuery,
   useRequest,
   useTranslation,
@@ -32,6 +33,20 @@ export function EditGallery() {
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { openDialog, DialogElement } = useConfirmationDialog({
+    title: t('admin.deleteGallery'),
+    text: t('admin.deleteGalleryText'),
+    confirm: t('admin.delete'),
+    onAction: ({ onError, onClose }) => {
+      deleteRequest(`/galleries/${galleryId}`)
+        .then(() => {
+          onClose();
+          navigate('/admin/galleries');
+        })
+        .catch((e) => onError(e));
+    },
+  });
+
   const contents = useMemo(() => {
     if (data == null) {
       return [];
@@ -81,34 +96,27 @@ export function EditGallery() {
     setSubmitting(false);
   };
 
-  const deleteGallery = (galleryId: string) => {
-    setSubmitting(true);
-    deleteRequest(`/galleries/${galleryId}`)
-      .then(() => {
-        setError(null);
-        navigate('/admin/galleries');
-      })
-      .catch((e) => setError(e));
-  };
-
   return (
     <>
+      <DialogElement />
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.edit')}
       </Typography>
       <div className="divider"></div>
-      <div>
+      <div className="flex gap-2">
         <Button as={Link} to="/admin/galleries">
           {t('back')}
         </Button>
-        <Button onClick={() => deleteGallery(galleryId!)} color="error">
+        <Button onClick={openDialog} color="error">
           {t('admin.delete')}
         </Button>
       </div>
       <QueryWrapper>
         <>
+          <div className="divider"></div>
           <AddPhoto onUpload={onUpload} />
           {error && <ErrorState error={error} />}
+          <div className="divider"></div>
           <Typography>{data?.galleryId}</Typography>
           <Typography>{data?.title}</Typography>
           <Typography>{data?.description}</Typography>
@@ -120,20 +128,16 @@ export function EditGallery() {
                   {content.title} ({content.order})
                 </Typography>
                 <Typography>{content.createdAt}</Typography>
-                {index !== 0 && (
-                  <ButtonIcon
-                    onClick={() => moveContent(content.contentId, true)}
-                    icon={ArrowUpIcon}
-                    disabled={submitting}
-                  />
-                )}
-                {index < contents.length - 1 && (
-                  <ButtonIcon
-                    onClick={() => moveContent(content.contentId, false)}
-                    icon={ArrowDownIcon}
-                    disabled={submitting}
-                  />
-                )}
+                <ButtonIcon
+                  onClick={() => moveContent(content.contentId, true)}
+                  icon={ArrowUpIcon}
+                  disabled={submitting || index == 0}
+                />
+                <ButtonIcon
+                  onClick={() => moveContent(content.contentId, false)}
+                  icon={ArrowDownIcon}
+                  disabled={submitting || index >= contents.length - 1}
+                />
                 <Button onClick={() => deleteContent(content.contentId)} color="error" disabled={submitting}>
                   {t('admin.delete')}
                 </Button>

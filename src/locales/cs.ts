@@ -24,6 +24,8 @@ export const CS = {
     galleries: 'Galerie',
     add: 'Přidat',
     delete: 'Smazat',
+    deleteGallery: 'Opravdu chcete smazat galerii?',
+    deleteGalleryText: 'Smazání galerie je nevratné.',
     inputTitle: 'Nadpis',
     photo: 'Fotka',
     description: 'Popis',

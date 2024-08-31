@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 export function Galleries() {
   const { t } = useTranslation('galleryeet');
   const { get, delete: deleteRequest } = useRequest();
-  const { QueryWrapper, data, refetch } = useQuery<GalleryeetFullGalleryDto[]>({
+  const { QueryWrapper, data } = useQuery<GalleryeetFullGalleryDto[]>({
     queryKey: ['galleryeet', 'galleries'],
     queryFn: () => get('/galleries'),
     fallbackValue: [],
@@ -21,15 +21,6 @@ export function Galleries() {
       .toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix())
       .filter((gallery) => gallery.galleryId !== 'instax');
   }, [data]);
-
-  const deleteGallery = (galleryId: string) => {
-    deleteRequest(`/galleries/${galleryId}`)
-      .then(() => {
-        setError(null);
-        refetch();
-      })
-      .catch((e) => setError(e));
-  };
 
   return (
     <>
@@ -61,9 +52,6 @@ export function Galleries() {
                   </Button>
                   <Button as={Link} to={`/admin/edit-gallery/${gallery.galleryId}`}>
                     {t('admin.edit')}
-                  </Button>
-                  <Button onClick={() => deleteGallery(gallery.galleryId)} color="error">
-                    {t('admin.delete')}
                   </Button>
                 </div>
               </div>

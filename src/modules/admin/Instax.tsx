@@ -51,8 +51,10 @@ export function Instax() {
       </div>
       <QueryWrapper>
         <>
+          <div className="divider"></div>
           <AddPhoto onUpload={onUpload} />
           {error && <ErrorState error={error} />}
+          <div className="divider"></div>
           <div className="flex flex-col gap-2">
             {data?.contents.map((content) => (
               <div key={content.contentId} className="flex justify-between gap-2">

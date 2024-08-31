@@ -24,6 +24,8 @@ export const EN = {
     galleries: 'Galleries',
     add: 'Add',
     delete: 'Delete',
+    deleteGallery: 'Are you sure you want to delete the gallery?',
+    deleteGalleryText: 'Deleting the gallery is irreversible.',
     inputTitle: 'Title',
     photo: 'Photo',
     description: 'Description',
