@@ -34,9 +34,11 @@ export function Posts() {
         {posts.map((post) => (
           <>
             <div className="divider"></div>
-            <div key={post.postId} className="flex gap-4 p-2 hover:opacity-60">
+            <div key={post.postId} className="flex justify-between p-2 hover:opacity-60">
               <div className="flex flex-col">
-                <Typography>{post.title}</Typography>
+                <Typography size="3xl" weight="semibold">
+                  {post.title}
+                </Typography>
                 <Typography>{dayjs(post.createdAt).format('D.M.YYYY HH:mm')}</Typography>
               </div>
               <Button as={Link} to={post.postId}>

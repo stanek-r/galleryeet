@@ -6,7 +6,11 @@ export default {
     "./node_modules/gtomy-lib/index.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      listStyleType: {
+        square: 'square',
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {

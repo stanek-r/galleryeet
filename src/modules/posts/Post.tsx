@@ -30,7 +30,7 @@ export function Post() {
         if (imageContent == null) {
           continue;
         }
-        ret.push(<GalleryItem key={imageContent.contentId} content={imageContent} />);
+        ret.push(<GalleryItem key={imageContent.contentId} content={imageContent} size="wide" />);
       } else {
         ret.push(ct);
       }
