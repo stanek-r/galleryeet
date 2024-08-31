@@ -49,7 +49,7 @@ export function Galleries() {
                 className="h-[270px] w-[405px] object-contain"
                 wrapperClassName="h-[270px] w-[405px] object-contain"
               />
-              <div className="flex flex-col py-2">
+              <div className="flex flex-col py-2 self-center md:self-start">
                 <Typography size="lg" weight="medium">
                   {gallery.title}
                 </Typography>
