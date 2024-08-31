@@ -24,9 +24,9 @@ export function Post() {
     const splitContent = data.content.split(';;;;;');
     const ret: (string | JSX.Element)[] = [];
     for (const ct of splitContent) {
-      if (ct.startsWith('contentId:')) {
-        const contentId = ct.replace('contentId:', '');
-        const imageContent = data.contents.find((c) => c.contentId === contentId);
+      if (ct.startsWith('content:')) {
+        const content = ct.replace('content:', '');
+        const imageContent = data.contents.find((c) => c.title === content);
         if (imageContent == null) {
           continue;
         }
