@@ -21,14 +21,19 @@ export function Post() {
     if (data == null) {
       return [];
     }
-    const splitContent = data.content.split('{{{content}}}');
+    const splitContent = data.content.split(';;;;;');
     const ret: (string | JSX.Element)[] = [];
-    let i = 0;
     for (const ct of splitContent) {
-      const imageContent = data.contents[i];
-      ret.push(ct);
-      ret.push(<GalleryItem key={imageContent.contentId} content={imageContent} />);
-      i++;
+      if (ct.startsWith('contentId:')) {
+        const contentId = ct.replace('contentId:', '');
+        const imageContent = data.contents.find((c) => c.contentId === contentId);
+        if (imageContent == null) {
+          continue;
+        }
+        ret.push(<GalleryItem key={imageContent.contentId} content={imageContent} />);
+      } else {
+        ret.push(ct);
+      }
     }
     return ret;
   }, []);

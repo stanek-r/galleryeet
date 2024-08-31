@@ -24,6 +24,7 @@ export const CS = {
     title: 'Admin',
     create: 'Vytvořit',
     createGallery: 'Vytvořit galerii',
+    createPost: 'Vytvořit post',
     galleries: 'Galerie',
     add: 'Přidat',
     delete: 'Smazat',

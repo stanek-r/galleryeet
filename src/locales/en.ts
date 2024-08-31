@@ -24,6 +24,7 @@ export const EN = {
     title: 'Admin',
     create: 'Create',
     createGallery: 'Create gallery',
+    createPost: 'Create post',
     galleries: 'Galleries',
     add: 'Add',
     delete: 'Delete',

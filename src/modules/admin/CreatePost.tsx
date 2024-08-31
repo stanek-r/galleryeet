@@ -105,7 +105,7 @@ export function CreatePost() {
   return (
     <>
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
-        {t('admin.createGallery')}
+        {t('admin.createPost')}
       </Typography>
       <div className="divider"></div>
       <div>

@@ -131,7 +131,7 @@ export function EditGallery() {
                 <ButtonIcon
                   onClick={() => moveContent(content.contentId, true)}
                   icon={ArrowUpIcon}
-                  disabled={submitting || index == 0}
+                  disabled={submitting || index === 0}
                 />
                 <ButtonIcon
                   onClick={() => moveContent(content.contentId, false)}

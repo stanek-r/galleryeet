@@ -24,7 +24,7 @@ export function Corousel() {
           <button
             type="button"
             onClick={() => setItem(i)}
-            className={twMerge('btn btn-xs', item == i && 'btn-neutral')}
+            className={twMerge('btn btn-xs', item === i && 'btn-neutral')}
           >
             {i}
           </button>
