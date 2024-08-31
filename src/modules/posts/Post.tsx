@@ -27,12 +27,15 @@ export function Post() {
     const ret: (string | GalleryeetContentDto)[] = [];
     for (const ct of splitContent) {
       if (ct.startsWith('content:')) {
-        const content = ct.replace('content:', '').trim();
-        const imageContent = data.contents.find((c) => c.title === content);
-        if (imageContent == null) {
-          continue;
+        const content = ct.replace('content:', '');
+        const splitContent2 = content.split(';');
+        for (const ct2 of splitContent2) {
+          const imageContent = data.contents.find((c) => c.title === ct2);
+          if (imageContent == null) {
+            continue;
+          }
+          ret.push(imageContent);
         }
-        ret.push(imageContent);
       } else {
         ret.push(ct);
       }

@@ -2,18 +2,21 @@
     font-size: 35px;
     font-weight: bold;
     margin-top: 40px;
+    line-height: 1em;
 }
 
 .my-posts h3 {
     font-size: 25px;
     font-weight: bold;
     margin-top: 40px;
+    line-height: 1em;
 }
 
 .my-posts h4 {
     margin-left: 10px;
     font-size: 20px;
     font-weight: bolder;
+    line-height: 1em;
 }
 
 .my-posts ul {
