@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm';
 import dayjs from 'dayjs';
 import { Fragment, useMemo } from 'react';
 import { GalleryItem } from '../../components/GalleryItem';
-import './Changelog.css';
+import './Post.css';
 
 export function Post() {
   const { t } = useTranslation('galleryeet');
