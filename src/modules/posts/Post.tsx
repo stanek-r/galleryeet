@@ -60,6 +60,8 @@ export function Post() {
           }
           return <Fragment key={index}>{content}</Fragment>;
         })}
+        <div className="divider"></div>
+        <div className="h-12"></div>
       </>
     </QueryWrapper>
   );

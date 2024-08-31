@@ -6,9 +6,10 @@ export interface GalleryItemProps {
   content: GalleryeetFullContentDto | GalleryeetContentDto;
   showTitle?: boolean;
   size?: 'wide' | 'normal';
+  disableHeightLimit?: boolean;
 }
 
-export function GalleryItem({ content, showTitle, size = 'normal' }: GalleryItemProps) {
+export function GalleryItem({ content, showTitle, size = 'normal', disableHeightLimit }: GalleryItemProps) {
   const { openDialog, DialogElement } = useImageDialog({
     imageId: content.imageId,
     videoId: content.videoId,
@@ -19,16 +20,23 @@ export function GalleryItem({ content, showTitle, size = 'normal' }: GalleryItem
   return (
     <div
       className={twMerge(
-        'flex h-96 flex-col items-center justify-center p-2',
-        size === 'normal' ? 'w-full md:w-1/2 lg:w-1/4' : 'w-full lg:w-1/3'
+        'flex flex-col items-center justify-center p-2',
+        size === 'normal' ? 'w-full md:w-1/2 lg:w-1/4' : 'w-full lg:w-1/3',
+        !disableHeightLimit && 'h-96'
       )}
     >
       <DialogElement />
       {content.imageId && (
         <CloudflareImage
           imageId={content.imageId}
-          className={twMerge('max-w-full cursor-zoom-in object-contain', showTitle ? 'h-[332px]' : 'h-[368px]')}
-          wrapperClassName={twMerge('max-w-full cursor-zoom-in object-contain', showTitle ? 'h-[332px]' : 'h-[368px]')}
+          className={twMerge(
+            'max-w-full cursor-zoom-in object-contain',
+            !disableHeightLimit && (showTitle ? 'h-[332px]' : 'h-[368px]')
+          )}
+          wrapperClassName={twMerge(
+            'max-w-full cursor-zoom-in object-contain',
+            !disableHeightLimit && (showTitle ? 'h-[332px]' : 'h-[368px]')
+          )}
           onClick={openDialog}
           srcType="miniature"
         />

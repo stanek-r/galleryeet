@@ -40,17 +40,12 @@ export function CreatePost() {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
-  const [uploadCount, setUploadCount] = useState<number>(0);
-  const [totalUploadCount, setTotalUploadCount] = useState<number>(0);
-
   const onSubmit = async (form: CreatePostForm) => {
     setSubmitting(true);
     setError(null);
 
     const filelist = form.contents!.file;
     const contentList: GalleryeetContentDto[] = [];
-    setUploadCount(0);
-    setTotalUploadCount(filelist.length);
     for (const file of filelist) {
       const image = await uploadImage(file);
       if (image == null) {
@@ -67,7 +62,6 @@ export function CreatePost() {
         continue;
       }
       contentList.push(content);
-      setUploadCount((prev) => prev + 1);
     }
 
     const thumbnailImage = await uploadImage(form.thumbnail!.file);

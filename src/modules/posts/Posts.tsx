@@ -1,13 +1,13 @@
-import { Button, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { Button, ErrorState, RequirePermission, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { Link } from 'react-router-dom';
 import { GalleryeetPostDto } from '../../models/post.dto';
 import dayjs from 'dayjs';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 export function Posts() {
   const { t } = useTranslation('galleryeet');
-  const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetPostDto[]>({
+  const { get, delete: deleteRequest } = useRequest();
+  const { QueryWrapper, data, refetch } = useQuery<GalleryeetPostDto[]>({
     queryKey: ['galleryeet', 'posts'],
     queryFn: () => get('/posts'),
     fallbackValue: [],
@@ -18,6 +18,13 @@ export function Posts() {
     }
     return data.toSorted((a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix());
   }, [data]);
+  const [error, setError] = useState<any>(null);
+
+  const deletePost = (id: string) => {
+    deleteRequest(`/posts/${id}`)
+      .then(() => refetch())
+      .catch((e) => setError(e));
+  };
 
   return (
     <QueryWrapper>
@@ -31,6 +38,7 @@ export function Posts() {
             <Typography className="text-center">{t('posts.noPosts')}</Typography>
           </>
         )}
+        {error && <ErrorState error={error} />}
         {posts.map((post) => (
           <>
             <div className="divider"></div>
@@ -41,9 +49,16 @@ export function Posts() {
                 </Typography>
                 <Typography>{dayjs(post.createdAt).format('D.M.YYYY HH:mm')}</Typography>
               </div>
-              <Button as={Link} to={post.postId}>
-                {t('view')}
-              </Button>
+              <div className="flex gap-2">
+                <Button as={Link} to={post.postId}>
+                  {t('view')}
+                </Button>
+                <RequirePermission minimalRole="owner">
+                  <Button color="error" onClick={() => deletePost(post.postId)}>
+                    {t('admin.delete')}
+                  </Button>
+                </RequirePermission>
+              </div>
             </div>
           </>
         ))}
