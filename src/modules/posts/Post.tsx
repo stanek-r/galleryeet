@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import dayjs from 'dayjs';
 import { Fragment, useMemo } from 'react';
 import { GalleryItem } from '../../components/GalleryItem';
+import './Changelog.css';
 
 export function Post() {
   const { t } = useTranslation('galleryeet');
@@ -52,7 +53,7 @@ export function Post() {
         {contents.map((content, index) => {
           if (typeof content === 'string') {
             return (
-              <Markdown key={index} remarkPlugins={[remarkGfm]}>
+              <Markdown key={index} remarkPlugins={[remarkGfm]} className="my-posts">
                 {content}
               </Markdown>
             );

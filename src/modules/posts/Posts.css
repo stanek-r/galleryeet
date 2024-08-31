@@ -1,0 +1,23 @@
+.my-posts h1 {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.my-posts h2 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.my-posts h3 {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.my-posts ul {
+    margin-left: 40px;
+    list-style-type: square;
+}
