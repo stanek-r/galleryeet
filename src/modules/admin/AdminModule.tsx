@@ -5,6 +5,7 @@ import { CreateGallery } from './gallery/CreateGallery';
 import { Instax } from './Instax';
 import { EditGallery } from './gallery/EditGallery';
 import { CreatePost } from './post/CreatePost';
+import { EditPost } from './post/EditPost';
 
 export default function AdminModule() {
   return (
@@ -14,6 +15,7 @@ export default function AdminModule() {
       <Route path="/create-post" element={withColumnPage(CreatePost)} />
       <Route path="/instax" element={withColumnPage(Instax)} />
       <Route path="/edit-gallery/:galleryId" element={withColumnPage(EditGallery)} />
+      <Route path="/edit-post/:postId" element={withColumnPage(EditPost)} />
     </Routes>
   );
 }

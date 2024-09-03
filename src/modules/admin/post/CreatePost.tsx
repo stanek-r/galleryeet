@@ -119,7 +119,7 @@ export function CreatePost() {
           multiple={false}
           rules={{ required: true }}
         />
-        <FormTextareaInput name="content" label={t('admin.content')} control={control} />
+        <FormTextareaInput name="content" label={t('admin.content')} control={control} className="h-96" />
         <FormFileInput name="contents" label={t('admin.contents')} control={control} multiple />
         {error && <ErrorState error={error} />}
         <Button type="submit" disabled={submitting} color="primary">

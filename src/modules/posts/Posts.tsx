@@ -29,7 +29,11 @@ export function Posts() {
         <div className="divider"></div>
         {posts.length === 0 && <Typography className="text-center">{t('posts.noPosts')}</Typography>}
         {posts.map((post) => (
-          <div key={post.postId} className="flex flex-col p-2 hover:opacity-60" onClick={() => navigate(post.postId)}>
+          <div
+            key={post.postId}
+            className="flex cursor-pointer flex-col p-2 hover:opacity-60"
+            onClick={() => navigate(post.postId)}
+          >
             <Typography size="3xl" weight="medium">
               {post.title}
             </Typography>
