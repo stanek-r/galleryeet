@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
+import { GalleryeetFullGalleryDto } from '../../../models/gallery.dto';
 import {
   Button,
   ButtonIcon,
@@ -11,8 +11,8 @@ import {
   useRequest,
   useTranslation,
 } from 'gtomy-lib';
-import { GalleryeetContentDto } from '../../models/content.dto';
-import { AddPhoto } from './AddPhoto';
+import { GalleryeetContentDto } from '../../../models/content.dto';
+import { AddPhoto } from '../AddPhoto';
 import { useMemo, useState } from 'react';
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/outline';
 
@@ -104,16 +104,16 @@ export function EditGallery() {
       </Typography>
       <div className="divider"></div>
       <div className="flex gap-2">
-        <Button as={Link} to="/admin/galleries">
+        <Button as={Link} to="/gallery">
           {t('back')}
         </Button>
         <Button onClick={openDialog} color="error">
           {t('admin.delete')}
         </Button>
       </div>
+      <div className="divider"></div>
       <QueryWrapper>
         <>
-          <div className="divider"></div>
           <AddPhoto onUpload={onUpload} />
           {error && <ErrorState error={error} />}
           <div className="divider"></div>

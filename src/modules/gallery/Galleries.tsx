@@ -46,14 +46,14 @@ export function Galleries() {
               <CloudflareImage
                 imageId={gallery.thumbnail.imageId!}
                 srcType="miniature"
-                className="h-[270px] w-[405px] object-contain"
-                wrapperClassName="h-[270px] w-[405px] object-contain"
+                className="h-[270px] w-[405px] max-w-[50vw] shrink-0 object-contain"
+                wrapperClassName="h-[270px] w-[405px] object-contain flex-shrink-0 max-w-[50vw]"
               />
-              <div className="flex flex-col py-2 self-center md:self-start">
-                <Typography size="lg" weight="medium">
+              <div className="flex flex-col self-center py-2 md:self-start">
+                <Typography size="3xl" weight="medium">
                   {gallery.title}
                 </Typography>
-                <Typography>{gallery.description}</Typography>
+                <Typography size="lg">{gallery.description}</Typography>
               </div>
             </div>
           </>

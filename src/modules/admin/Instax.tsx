@@ -44,6 +44,7 @@ export function Instax() {
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('instax.title')}
       </Typography>
+      <div className="divider"></div>
       <div>
         <Button as={Link} to="/admin">
           {t('back')}
@@ -51,7 +52,6 @@ export function Instax() {
       </div>
       <QueryWrapper>
         <>
-          <div className="divider"></div>
           <AddPhoto onUpload={onUpload} />
           {error && <ErrorState error={error} />}
           <div className="divider"></div>

@@ -14,24 +14,26 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../models/content.dto';
-import { GalleryeetCreatePostDto, GalleryeetPostDto } from '../../models/post.dto';
+import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../../models/content.dto';
+import { GalleryeetCreatePostDto, GalleryeetPostDto } from '../../../models/post.dto';
 
 interface CreatePostForm {
   title: string | null;
   content: string | null;
   thumbnail: SingleFormFile | null;
   contents: MultipleFormFile | null;
+  videoContents: GalleryeetCreateContentDto[];
 }
 
 export function CreatePost() {
   const { t } = useTranslation('galleryeet');
-  const { handleSubmit, watch, control } = useForm<CreatePostForm>({
+  const { handleSubmit, control } = useForm<CreatePostForm>({
     defaultValues: {
       title: null,
       content: null,
       thumbnail: null,
       contents: null,
+      videoContents: [],
     },
   });
   const navigate = useNavigate();
@@ -44,24 +46,25 @@ export function CreatePost() {
     setSubmitting(true);
     setError(null);
 
-    const filelist = form.contents!.file;
     const contentList: GalleryeetContentDto[] = [];
-    for (const file of filelist) {
-      const image = await uploadImage(file);
-      if (image == null) {
-        continue;
+    if (form.contents) {
+      for (const file of form.contents.file) {
+        const image = await uploadImage(file);
+        if (image == null) {
+          continue;
+        }
+        const content = await post<GalleryeetContentDto>('/content', {
+          title: file.name,
+          imageId: image.id,
+        } as GalleryeetCreateContentDto).catch((e) => {
+          console.error(e);
+          return null;
+        });
+        if (content == null) {
+          continue;
+        }
+        contentList.push(content);
       }
-      const content = await post<GalleryeetContentDto>('/content', {
-        title: file.name,
-        imageId: image.id,
-      } as GalleryeetCreateContentDto).catch((e) => {
-        console.error(e);
-        return null;
-      });
-      if (content == null) {
-        continue;
-      }
-      contentList.push(content);
     }
 
     const thumbnailImage = await uploadImage(form.thumbnail!.file);
@@ -116,7 +119,7 @@ export function CreatePost() {
           multiple={false}
           rules={{ required: true }}
         />
-        <FormTextareaInput name="content" label={t('admin.content')} control={control} rules={{ required: true }} />
+        <FormTextareaInput name="content" label={t('admin.content')} control={control} />
         <FormFileInput name="contents" label={t('admin.contents')} control={control} multiple />
         {error && <ErrorState error={error} />}
         <Button type="submit" disabled={submitting} color="primary">

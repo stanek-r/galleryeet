@@ -12,8 +12,8 @@ import {
   useTranslation,
 } from 'gtomy-lib';
 import { useForm } from 'react-hook-form';
-import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../models/content.dto';
-import { GalleryeetCreateGalleryDto, GalleryeetGalleryDto } from '../../models/gallery.dto';
+import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../../models/content.dto';
+import { GalleryeetCreateGalleryDto, GalleryeetGalleryDto } from '../../../models/gallery.dto';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 

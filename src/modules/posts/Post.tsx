@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { Link, useParams } from 'react-router-dom';
+import { Button, RequirePermission, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetFullPostDto } from '../../models/post.dto';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -55,6 +55,16 @@ export function Post() {
           {dayjs(data?.createdAt).format('D.M.YYYY HH:mm')}
         </Typography>
         <div className="divider"></div>
+        <div className="flex gap-4">
+          <Button as={Link} to="/posts">
+            {t('back')}
+          </Button>
+          <RequirePermission minimalRole="owner">
+            <Button as={Link} to={`/admin/edit-post/${postId}`}>
+              {t('admin.edit')}
+            </Button>
+          </RequirePermission>
+        </div>
         {contents.map((content, index) => {
           if (typeof content === 'string') {
             return (

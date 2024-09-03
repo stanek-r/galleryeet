@@ -8,7 +8,7 @@ import {
   useTranslation,
 } from 'gtomy-lib';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../models/content.dto';
-import { AddPhotoForm } from './EditGallery';
+import { AddPhotoForm } from './gallery/EditGallery';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 

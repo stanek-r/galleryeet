@@ -22,6 +22,7 @@ export function Corousel() {
       <div className="flex w-full justify-center gap-2 py-2">
         {[1, 2, 3, 4].map((i) => (
           <button
+            key={i}
             type="button"
             onClick={() => setItem(i)}
             className={twMerge('btn btn-xs', item === i && 'btn-neutral')}

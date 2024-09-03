@@ -10,17 +10,14 @@ export function Admin() {
       </Typography>
       <div className="divider"></div>
       <div className="flex gap-4">
-        <Button as={Link} to="galleries">
-          {t('admin.galleries')}
-        </Button>
         <Button as={Link} to="create-gallery">
           {t('admin.createGallery')}
         </Button>
-        <Button as={Link} to="instax">
-          {t('instax.title')}
-        </Button>
         <Button as={Link} to="create-post">
           {t('admin.createPost')}
+        </Button>
+        <Button as={Link} to="instax">
+          {t('instax.title')}
         </Button>
       </div>
     </>

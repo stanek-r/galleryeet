@@ -4,12 +4,14 @@ export const EN = {
   description:
     "Welcome to our travel and photography blog! Explore travel adventures through individual galleries, posts and a special Instax section. Join the world travels I'm sharing here.",
   home: 'Home',
+  profile: 'Profile',
   view: 'View',
   back: 'Back',
   gallery: {
     title: 'Gallery',
     noGalleries: 'No galleries were found.',
     homepageLastGalleries: 'Newest galleries',
+    homepageLastInstax: 'Newest Instax photos',
   },
   posts: {
     title: 'Posts',

@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
-import { Typography, useQuery, useRequest } from 'gtomy-lib';
+import { Button, RequirePermission, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryItem } from '../../components/GalleryItem';
 import { useMemo } from 'react';
 
 export function Gallery() {
+  const { t } = useTranslation('galleryeet');
   const { galleryId } = useParams();
   const { get } = useRequest();
   const { QueryWrapper, data } = useQuery<GalleryeetFullGalleryDto | null>({
@@ -29,6 +30,16 @@ export function Gallery() {
           {data?.description}
         </Typography>
         <div className="divider"></div>
+        <div className="flex gap-4">
+          <Button as={Link} to="/gallery">
+            {t('back')}
+          </Button>
+          <RequirePermission minimalRole="owner">
+            <Button as={Link} to={`/admin/edit-gallery/${galleryId}`}>
+              {t('admin.edit')}
+            </Button>
+          </RequirePermission>
+        </div>
         <div className="flex flex-wrap">
           {contents.map((content) => (
             <GalleryItem key={content.contentId} content={content} />

@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
+import { HomePage } from './modules/home/HomePage';
 import {
   BASE_PROFILE_ROUTE,
   GoogleAnalyticsProvider,

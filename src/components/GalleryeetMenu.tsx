@@ -5,7 +5,7 @@ export function GalleryeetMenu() {
   const { t } = useTranslation('galleryeet');
 
   return (
-    <Menu showIcon showAuth>
+    <Menu showIcon showAuth dropdownActions={<Link to="/profile">{t('profile')}</Link>}>
       <MenuItem as={Link} to="/">
         {t('home')}
       </MenuItem>
