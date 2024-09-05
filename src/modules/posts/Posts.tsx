@@ -26,19 +26,26 @@ export function Posts() {
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('posts.title')}
         </Typography>
-        <div className="divider"></div>
-        {posts.length === 0 && <Typography className="text-center">{t('posts.noPosts')}</Typography>}
+        {posts.length === 0 && (
+          <>
+            <div className="divider"></div>
+            <Typography className="text-center">{t('posts.noPosts')}</Typography>
+          </>
+        )}
         {posts.map((post) => (
-          <div
-            key={post.postId}
-            className="flex cursor-pointer flex-col p-2 hover:opacity-60"
-            onClick={() => navigate(post.postId)}
-          >
-            <Typography size="3xl" weight="medium">
-              {post.title}
-            </Typography>
-            <Typography size="lg">{dayjs(post.createdAt).format('D.M.YYYY HH:mm')}</Typography>
-          </div>
+          <>
+            <div className="divider"></div>
+            <div
+              key={post.postId}
+              className="flex cursor-pointer flex-col p-2 hover:opacity-60"
+              onClick={() => navigate(post.postId)}
+            >
+              <Typography size="3xl" weight="medium">
+                {post.title}
+              </Typography>
+              <Typography size="lg">{dayjs(post.createdAt).format('D.M.YYYY HH:mm')}</Typography>
+            </div>
+          </>
         ))}
         <div className="h-12"></div>
       </>
