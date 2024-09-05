@@ -7,6 +7,7 @@ export interface GalleryeetContentDto {
   title: string;
   imageId?: string;
   videoId?: string;
+  isYoutube?: boolean;
 }
 
 export interface GalleryeetFullContentDto extends GalleryeetContentDto {
@@ -17,4 +18,5 @@ export interface GalleryeetCreateContentDto {
   title: string;
   imageId?: string;
   videoId?: string;
+  isYoutube?: boolean;
 }

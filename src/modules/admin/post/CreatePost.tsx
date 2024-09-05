@@ -1,40 +1,45 @@
 import {
   Button,
+  ButtonIcon,
   ErrorState,
   FormFileInput,
   FormTextareaInput,
   FormTextInput,
-  MultipleFormFile,
   SingleFormFile,
   Typography,
   useBlobstorage,
+  useDialog,
   useRequest,
   useTranslation,
 } from 'gtomy-lib';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../../models/content.dto';
 import { GalleryeetCreatePostDto, GalleryeetPostDto } from '../../../models/post.dto';
+import { CreateContentDialog } from './CreateContentDialog';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface CreatePostForm {
   title: string | null;
   content: string | null;
   thumbnail: SingleFormFile | null;
-  contents: MultipleFormFile | null;
-  videoContents: GalleryeetCreateContentDto[];
+  contents: GalleryeetContentDto[];
 }
 
 export function CreatePost() {
   const { t } = useTranslation('galleryeet');
-  const { handleSubmit, control } = useForm<CreatePostForm>({
+  const { handleSubmit, control, watch } = useForm<CreatePostForm>({
     defaultValues: {
       title: null,
       content: null,
       thumbnail: null,
-      contents: null,
-      videoContents: [],
+      contents: [],
     },
+  });
+  const { append, remove } = useFieldArray({
+    control,
+    name: 'contents',
   });
   const navigate = useNavigate();
   const { uploadImage } = useBlobstorage();
@@ -42,30 +47,15 @@ export function CreatePost() {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
+  const contents = watch('contents');
+
+  const { openDialog, DialogElement } = useDialog((props) => (
+    <CreateContentDialog onCreateContent={(content) => append(content)} {...props} />
+  ));
+
   const onSubmit = async (form: CreatePostForm) => {
     setSubmitting(true);
     setError(null);
-
-    const contentList: GalleryeetContentDto[] = [];
-    if (form.contents) {
-      for (const file of form.contents.file) {
-        const image = await uploadImage(file);
-        if (image == null) {
-          continue;
-        }
-        const content = await post<GalleryeetContentDto>('/content', {
-          title: file.name,
-          imageId: image.id,
-        } as GalleryeetCreateContentDto).catch((e) => {
-          console.error(e);
-          return null;
-        });
-        if (content == null) {
-          continue;
-        }
-        contentList.push(content);
-      }
-    }
 
     const thumbnailImage = await uploadImage(form.thumbnail!.file);
     if (thumbnailImage == null) {
@@ -86,7 +76,7 @@ export function CreatePost() {
     const createdPost = await post<GalleryeetPostDto>('/posts', {
       title: form.title,
       content: form.content,
-      contentIds: contentList.map((content) => content.contentId),
+      contentIds: form.contents.map((content) => content.contentId),
       thumbnailId: thumbnailContent.contentId,
     } as GalleryeetCreatePostDto).catch((e) => {
       setError(e);
@@ -101,6 +91,7 @@ export function CreatePost() {
 
   return (
     <>
+      <DialogElement />
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.createPost')}
       </Typography>
@@ -120,7 +111,18 @@ export function CreatePost() {
           rules={{ required: true }}
         />
         <FormTextareaInput name="content" label={t('admin.content')} control={control} className="h-96" />
-        <FormFileInput name="contents" label={t('admin.contents')} control={control} multiple />
+        <div className="divider"></div>
+        <div className="flex flex-col gap-2">
+          {contents.map((content, index) => (
+            <div className="flex justify-between gap-2" key={content.contentId}>
+              <Typography>{content.contentId}</Typography>
+              <Typography>{content.title}</Typography>
+              <ButtonIcon size="sm" icon={TrashIcon} onClick={() => remove(index)} />
+            </div>
+          ))}
+        </div>
+        <Button onClick={openDialog}>Add content</Button>
+        <div className="divider"></div>
         {error && <ErrorState error={error} />}
         <Button type="submit" disabled={submitting} color="primary">
           {t('admin.create')}

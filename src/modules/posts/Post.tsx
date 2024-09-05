@@ -30,7 +30,7 @@ export function Post() {
         const content = ct.replace('content:', '');
         const splitContent2 = content.split(';');
         const images = splitContent2.map((ct2) => {
-          const imageContent = data.contents.find((c) => c.title === ct2);
+          const imageContent = data.contents.find((c) => c.contentId === ct2);
           if (imageContent == null) {
             return null;
           }

@@ -1,6 +1,7 @@
-import { Button, CloudflareImage, Typography, useImageDialog } from 'gtomy-lib';
+import { CloudflareImage, Typography, useImageDialog } from 'gtomy-lib';
 import { GalleryeetContentDto, GalleryeetFullContentDto } from '../models/content.dto';
 import { twMerge } from 'tailwind-merge';
+import { useCallback } from 'react';
 
 export interface GalleryItemProps {
   content: GalleryeetFullContentDto | GalleryeetContentDto;
@@ -11,11 +12,19 @@ export interface GalleryItemProps {
 
 export function GalleryItem({ content, showTitle, size = 'normal', disableHeightLimit }: GalleryItemProps) {
   const { openDialog, DialogElement } = useImageDialog({
-    imageId: content.imageId,
+    imageId: content.videoId == null ? content.imageId : undefined,
     videoId: content.videoId,
     title: content.title,
     effect: 'blur',
   });
+
+  const onClick = useCallback(() => {
+    if (content.isYoutube) {
+      window.open('https://www.youtube.com/watch?v=' + content.videoId, '_blank');
+    } else {
+      openDialog();
+    }
+  }, [openDialog, content]);
 
   return (
     <div
@@ -37,11 +46,10 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
             'max-w-full cursor-zoom-in object-contain',
             !disableHeightLimit && (showTitle ? 'h-[332px]' : 'h-[368px]')
           )}
-          onClick={openDialog}
+          onClick={onClick}
           srcType="miniature"
         />
       )}
-      {content.videoId && <Button onClick={openDialog}>Video</Button>}
       {showTitle && (
         <Typography size="2xl" weight="semibold" className="mt-1 text-center">
           {content.title}
