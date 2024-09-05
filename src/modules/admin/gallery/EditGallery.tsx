@@ -41,7 +41,7 @@ export function EditGallery() {
       deleteRequest(`/galleries/${galleryId}`)
         .then(() => {
           onClose();
-          navigate('/admin/galleries');
+          navigate('/gallery');
         })
         .catch((e) => onError(e));
     },

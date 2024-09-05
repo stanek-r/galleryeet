@@ -30,6 +30,7 @@ export const CS = {
     add: 'Přidat',
     delete: 'Smazat',
     deleteGallery: 'Opravdu chcete smazat galerii?',
+    deletePost: 'Opravdu chcete smazat post?',
     deleteGalleryText: 'Smazání galerie je nevratné.',
     inputTitle: 'Nadpis',
     photo: 'Fotka',

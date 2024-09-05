@@ -6,12 +6,13 @@ import {
   FormTextareaInput,
   FormTextInput,
   Typography,
+  useConfirmationDialog,
   useDialog,
   useQuery,
   useRequest,
   useTranslation,
 } from 'gtomy-lib';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { GalleryeetFullPostDto } from '../../../models/post.dto';
 import { TrashIcon } from '@heroicons/react/24/outline';
@@ -32,6 +33,7 @@ export function EditPost() {
     queryFn: () => get('/posts/' + postId),
     fallbackValue: null,
   });
+  const navigate = useNavigate();
 
   const { handleSubmit, control, setValue, watch } = useForm<EditPostForm>({
     defaultValues: {
@@ -41,6 +43,18 @@ export function EditPost() {
   });
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const { openDialog: openDialogDelete, DialogElement: DialogElementDelete } = useConfirmationDialog({
+    onAction: ({ onClose, onError }) => {
+      deleteRequest(`/posts/${postId}`)
+        .then(() => {
+          onClose();
+          navigate('/posts');
+        })
+        .catch((e) => onError(e));
+    },
+    title: t('admin.deletePost'),
+    text: t('admin.deleteGalleryText'),
+  });
 
   const uploadContent = useCallback(
     async (content: GalleryeetContentDto) => {
@@ -80,14 +94,18 @@ export function EditPost() {
 
   return (
     <>
+      <DialogElementDelete />
       <DialogElement />
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.edit')}
       </Typography>
       <div className="divider"></div>
-      <div>
+      <div className="flex gap-2">
         <Button as={Link} to="/posts">
           {t('back')}
+        </Button>
+        <Button onClick={openDialogDelete} color="error">
+          {t('admin.delete')}
         </Button>
       </div>
       <QueryWrapper>

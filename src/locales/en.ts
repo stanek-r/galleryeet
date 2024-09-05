@@ -31,6 +31,7 @@ export const EN = {
     add: 'Add',
     delete: 'Delete',
     deleteGallery: 'Are you sure you want to delete the gallery?',
+    deletePost: 'Are you sure you want to delete the post?',
     deleteGalleryText: 'Deleting the gallery is irreversible.',
     inputTitle: 'Title',
     photo: 'Photo',

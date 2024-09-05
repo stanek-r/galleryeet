@@ -39,11 +39,11 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
         <CloudflareImage
           imageId={content.imageId}
           className={twMerge(
-            'max-w-full cursor-zoom-in object-contain',
+            'max-w-full cursor-pointer object-contain',
             !disableHeightLimit && (showTitle ? 'h-[332px]' : 'h-[368px]')
           )}
           wrapperClassName={twMerge(
-            'max-w-full cursor-zoom-in object-contain',
+            'max-w-full cursor-pointer object-contain',
             !disableHeightLimit && (showTitle ? 'h-[332px]' : 'h-[368px]')
           )}
           onClick={onClick}
