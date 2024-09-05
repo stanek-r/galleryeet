@@ -44,7 +44,7 @@ export function CreateContentDialog({ onCreateContent, ...props }: CreateContent
   const [error, setError] = useState<any>(null);
   const { onOpenChange } = props;
 
-  const isVideo = watch('videoId');
+  const isVideo = watch('isVideo');
   const isYoutube = watch('isYoutube');
 
   const onSubmit = async (form: CreateContentForm) => {
