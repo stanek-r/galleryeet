@@ -14,7 +14,7 @@ import {
 } from 'gtomy-lib';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../../models/content.dto';
 import { GalleryeetCreatePostDto, GalleryeetPostDto } from '../../../models/post.dto';
 import { CreateContentDialog } from './CreateContentDialog';
@@ -43,7 +43,7 @@ export function CreatePost() {
   });
   const navigate = useNavigate();
   const { uploadImage } = useBlobstorage();
-  const { post } = useRequest();
+  const { post, delete: deleteRequest } = useRequest();
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
@@ -89,6 +89,14 @@ export function CreatePost() {
     }
   };
 
+  const removeContent = useCallback(
+    (content: GalleryeetContentDto, index: number) =>
+      deleteRequest(`/content/${content.contentId}`)
+        .then(() => remove(index))
+        .catch((e) => setError(e)),
+    [deleteRequest, remove, setError]
+  );
+
   return (
     <>
       <DialogElement />
@@ -117,7 +125,7 @@ export function CreatePost() {
             <div className="flex justify-between gap-2" key={content.contentId}>
               <Typography>{content.contentId}</Typography>
               <Typography>{content.title}</Typography>
-              <ButtonIcon size="sm" icon={TrashIcon} onClick={() => remove(index)} />
+              <ButtonIcon size="sm" icon={TrashIcon} onClick={() => removeContent(content, index)} />
             </div>
           ))}
         </div>
