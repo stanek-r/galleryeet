@@ -35,7 +35,7 @@ export function EditPost() {
   });
   const navigate = useNavigate();
 
-  const { handleSubmit, control, setValue, watch } = useForm<EditPostForm>({
+  const { handleSubmit, control, setValue } = useForm<EditPostForm>({
     defaultValues: {
       title: null,
       content: null,
