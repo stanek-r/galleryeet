@@ -11,9 +11,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: yarn install --immutable
-      - run: yarn playwright install --with-deps
-      - run: yarn playwright test
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
