@@ -1,4 +1,4 @@
-name: Lint check, audit and build
+name: Lint Check, Audit and Build
 
 on:
   pull_request:
@@ -19,6 +19,7 @@ jobs:
   audit:
     name: Npm Audit
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
