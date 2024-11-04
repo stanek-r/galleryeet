@@ -3,6 +3,7 @@ import { GalleryeetFullGalleryDto } from '../../../models/gallery.dto';
 import {
   Button,
   ButtonIcon,
+  DialogElement,
   ErrorState,
   QueryWrapper,
   SingleFormFile,
@@ -33,7 +34,7 @@ export function EditGallery() {
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { openDialog, DialogElement } = useConfirmationDialog({
+  const { openDialog, dialogElementProps } = useConfirmationDialog({
     title: t('admin.deleteGallery'),
     text: t('admin.deleteGalleryText'),
     confirm: t('admin.delete'),
@@ -98,7 +99,7 @@ export function EditGallery() {
 
   return (
     <>
-      <DialogElement />
+      <DialogElement {...dialogElementProps} />
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.edit')}
       </Typography>

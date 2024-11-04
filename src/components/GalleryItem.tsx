@@ -1,4 +1,4 @@
-import { CloudflareImage, Typography, useImageDialog } from 'gtomy-lib';
+import { CloudflareImage, DialogElement, Typography, useImageDialog } from 'gtomy-lib';
 import { GalleryeetContentDto, GalleryeetFullContentDto } from '../models/content.dto';
 import { twMerge } from 'tailwind-merge';
 import { useCallback } from 'react';
@@ -11,7 +11,7 @@ export interface GalleryItemProps {
 }
 
 export function GalleryItem({ content, showTitle, size = 'normal', disableHeightLimit }: GalleryItemProps) {
-  const { openDialog, DialogElement } = useImageDialog({
+  const { openDialog, dialogElementProps } = useImageDialog({
     imageId: content.videoId == null ? content.imageId : undefined,
     videoId: content.videoId,
     title: content.title,
@@ -34,7 +34,7 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
         !disableHeightLimit && 'h-96'
       )}
     >
-      <DialogElement />
+      <DialogElement {...dialogElementProps} />
       {content.imageId && (
         <CloudflareImage
           imageId={content.imageId}

@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonIcon,
+  DialogElement,
   ErrorState,
   FormFileInput,
   FormTextareaInput,
@@ -49,7 +50,7 @@ export function CreatePost() {
 
   const contents = watch('contents');
 
-  const { openDialog, DialogElement } = useDialog((props) => (
+  const { openDialog, dialogElementProps } = useDialog((props) => (
     <CreateContentDialog onCreateContent={(content) => append(content)} {...props} />
   ));
 
@@ -99,7 +100,7 @@ export function CreatePost() {
 
   return (
     <>
-      <DialogElement />
+      <DialogElement {...dialogElementProps} />
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.createPost')}
       </Typography>

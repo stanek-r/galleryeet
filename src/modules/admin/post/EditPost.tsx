@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import {
   Button,
   ButtonIcon,
+  DialogElement,
   ErrorState,
   FormTextareaInput,
   FormTextInput,
@@ -43,7 +44,7 @@ export function EditPost() {
   });
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const { openDialog: openDialogDelete, DialogElement: DialogElementDelete } = useConfirmationDialog({
+  const { openDialog: openDialogDelete, dialogElementProps: dialogElementPropsDelete } = useConfirmationDialog({
     onAction: ({ onClose, onError }) => {
       deleteRequest(`/posts/${postId}`)
         .then(() => {
@@ -74,7 +75,7 @@ export function EditPost() {
     [refetch, deleteRequest, postId]
   );
 
-  const { openDialog, DialogElement } = useDialog((props) => (
+  const { openDialog, dialogElementProps } = useDialog((props) => (
     <CreateContentDialog onCreateContent={uploadContent} {...props} />
   ));
 
@@ -94,8 +95,8 @@ export function EditPost() {
 
   return (
     <>
-      <DialogElementDelete />
-      <DialogElement />
+      <DialogElement {...dialogElementProps} />
+      <DialogElement {...dialogElementPropsDelete} />
       <Typography as="h1" size="4xl" weight="bold" className="text-center">
         {t('admin.edit')}
       </Typography>
