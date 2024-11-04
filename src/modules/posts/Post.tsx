@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { Button, RequirePermission, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { Button, QueryWrapper, RequirePermission, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetFullPostDto } from '../../models/post.dto';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -13,7 +13,7 @@ export function Post() {
   const { t } = useTranslation('galleryeet');
   const { postId } = useParams();
   const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetFullPostDto | null>({
+  const { data, wrapperProps } = useQuery<GalleryeetFullPostDto | null>({
     queryKey: ['galleryeet', 'posts', postId],
     queryFn: () => get('/posts/' + postId),
     fallbackValue: null,
@@ -45,7 +45,7 @@ export function Post() {
   }, [data]);
 
   return (
-    <QueryWrapper>
+    <QueryWrapper {...wrapperProps}>
       <>
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {data?.title}

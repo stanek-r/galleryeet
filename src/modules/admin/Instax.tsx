@@ -1,4 +1,4 @@
-import { Button, ErrorState, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { Button, ErrorState, QueryWrapper, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { Link } from 'react-router-dom';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
 import { useState } from 'react';
@@ -8,7 +8,7 @@ import { AddPhoto } from './AddPhoto';
 export function Instax() {
   const { t } = useTranslation('galleryeet');
   const { get, delete: deleteRequest, post } = useRequest();
-  const { QueryWrapper, data, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
+  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', 'instax'],
     queryFn: () => get('/galleries/instax'),
     fallbackValue: null,
@@ -50,7 +50,7 @@ export function Instax() {
           {t('back')}
         </Button>
       </div>
-      <QueryWrapper>
+      <QueryWrapper {...wrapperProps}>
         <>
           <AddPhoto onUpload={onUpload} />
           {error && <ErrorState error={error} />}

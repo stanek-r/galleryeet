@@ -5,6 +5,7 @@ import {
   ErrorState,
   FormTextareaInput,
   FormTextInput,
+  QueryWrapper,
   Typography,
   useConfirmationDialog,
   useDialog,
@@ -28,7 +29,7 @@ export function EditPost() {
   const { t } = useTranslation('galleryeet');
   const { postId } = useParams();
   const { put, get, post, delete: deleteRequest } = useRequest();
-  const { QueryWrapper, data, refetch } = useQuery<GalleryeetFullPostDto | null>({
+  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullPostDto | null>({
     queryKey: ['galleryeet', 'posts', postId],
     queryFn: () => get('/posts/' + postId),
     fallbackValue: null,
@@ -108,7 +109,7 @@ export function EditPost() {
           {t('admin.delete')}
         </Button>
       </div>
-      <QueryWrapper>
+      <QueryWrapper {...wrapperProps}>
         <>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <FormTextInput name="title" label={t('admin.inputTitle')} rules={{ required: true }} control={control} />

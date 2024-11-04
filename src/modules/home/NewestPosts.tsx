@@ -1,4 +1,4 @@
-import { Typography, useBreakpoint, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { QueryWrapper, Typography, useBreakpoint, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { GalleryeetPostDto } from '../../models/post.dto';
@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 export function NewestPosts() {
   const { t } = useTranslation('galleryeet');
   const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetPostDto[]>({
+  const { data, wrapperProps } = useQuery<GalleryeetPostDto[]>({
     queryKey: ['galleryeet', 'posts'],
     queryFn: () => get('/posts'),
     fallbackValue: [],
@@ -28,7 +28,7 @@ export function NewestPosts() {
       <Typography size="3xl" weight="semibold">
         {t('posts.homepageLastPosts')}
       </Typography>
-      <QueryWrapper>
+      <QueryWrapper {...wrapperProps}>
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {posts.map((post) => (
             <Link

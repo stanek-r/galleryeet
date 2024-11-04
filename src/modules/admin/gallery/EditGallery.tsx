@@ -4,6 +4,7 @@ import {
   Button,
   ButtonIcon,
   ErrorState,
+  QueryWrapper,
   SingleFormFile,
   Typography,
   useConfirmationDialog,
@@ -25,7 +26,7 @@ export function EditGallery() {
   const { t } = useTranslation('galleryeet');
   const { galleryId } = useParams();
   const { get, post, delete: deleteRequest, put } = useRequest();
-  const { QueryWrapper, data, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
+  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', galleryId],
     queryFn: () => get('/galleries/' + galleryId),
     fallbackValue: null,
@@ -112,7 +113,7 @@ export function EditGallery() {
         </Button>
       </div>
       <div className="divider"></div>
-      <QueryWrapper>
+      <QueryWrapper {...wrapperProps}>
         <>
           <AddPhoto onUpload={onUpload} />
           {error && <ErrorState error={error} />}

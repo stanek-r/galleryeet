@@ -1,4 +1,4 @@
-import { Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { QueryWrapper, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetPostDto } from '../../models/post.dto';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export function Posts() {
   const { t } = useTranslation('galleryeet');
   const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetPostDto[]>({
+  const { data, wrapperProps } = useQuery<GalleryeetPostDto[]>({
     queryKey: ['galleryeet', 'posts'],
     queryFn: () => get('/posts'),
     fallbackValue: [],
@@ -21,7 +21,7 @@ export function Posts() {
   }, [data]);
 
   return (
-    <QueryWrapper>
+    <QueryWrapper {...wrapperProps}>
       <>
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('posts.title')}

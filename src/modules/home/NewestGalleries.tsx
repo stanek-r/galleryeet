@@ -1,4 +1,12 @@
-import { CloudflareImage, Typography, useBreakpoint, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import {
+  CloudflareImage,
+  QueryWrapper,
+  Typography,
+  useBreakpoint,
+  useQuery,
+  useRequest,
+  useTranslation,
+} from 'gtomy-lib';
 import { Link } from 'react-router-dom';
 import { GalleryeetGalleryDto } from '../../models/gallery.dto';
 import { useMemo } from 'react';
@@ -7,7 +15,7 @@ import dayjs from 'dayjs';
 export function NewestGalleries() {
   const { t } = useTranslation('galleryeet');
   const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetGalleryDto[]>({
+  const { data, wrapperProps } = useQuery<GalleryeetGalleryDto[]>({
     queryKey: ['galleryeet', 'galleries'],
     queryFn: () => get('/galleries'),
     fallbackValue: [],
@@ -29,7 +37,7 @@ export function NewestGalleries() {
       <Typography size="3xl" weight="semibold">
         {t('gallery.homepageLastGalleries')}
       </Typography>
-      <QueryWrapper>
+      <QueryWrapper {...wrapperProps}>
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {galleries.map((gallery) => (
             <Link

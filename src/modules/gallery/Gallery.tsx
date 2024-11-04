@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { GalleryeetFullGalleryDto } from '../../models/gallery.dto';
-import { Button, RequirePermission, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { Button, QueryWrapper, RequirePermission, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryItem } from '../../components/GalleryItem';
 import { useMemo } from 'react';
 
@@ -8,7 +8,7 @@ export function Gallery() {
   const { t } = useTranslation('galleryeet');
   const { galleryId } = useParams();
   const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetFullGalleryDto | null>({
+  const { data, wrapperProps } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', galleryId],
     queryFn: () => get('/galleries/' + galleryId),
     fallbackValue: null,
@@ -21,7 +21,7 @@ export function Gallery() {
   }, [data]);
 
   return (
-    <QueryWrapper>
+    <QueryWrapper {...wrapperProps}>
       <>
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {data?.title}

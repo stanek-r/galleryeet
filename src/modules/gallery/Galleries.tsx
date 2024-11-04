@@ -1,4 +1,4 @@
-import { CloudflareImage, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
+import { CloudflareImage, QueryWrapper, Typography, useQuery, useRequest, useTranslation } from 'gtomy-lib';
 import { GalleryeetGalleryDto } from '../../models/gallery.dto';
 import { useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 export function Galleries() {
   const { t } = useTranslation('galleryeet');
   const { get } = useRequest();
-  const { QueryWrapper, data } = useQuery<GalleryeetGalleryDto[]>({
+  const { data, wrapperProps } = useQuery<GalleryeetGalleryDto[]>({
     queryKey: ['galleryeet', 'galleries'],
     queryFn: () => get('/galleries'),
     fallbackValue: [],
@@ -23,7 +23,7 @@ export function Galleries() {
   }, [data]);
 
   return (
-    <QueryWrapper>
+    <QueryWrapper {...wrapperProps}>
       <>
         <Typography as="h1" size="4xl" weight="bold" className="text-center">
           {t('gallery.title')}
