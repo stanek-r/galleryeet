@@ -3,6 +3,10 @@ import { sentryVitePlugin } from '@sentry/vite-plugin';
 import react from '@vitejs/plugin-react';
 import { version } from './package.json';
 
+const ReactCompilerConfig = {
+  target: '18',
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
@@ -18,7 +22,11 @@ export default defineConfig({
     },
   },
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler', ReactCompilerConfig]],
+      },
+    }),
     sentryVitePlugin({
       disable: process.env.SENTRY_PLUGIN_ENABLED !== 'true',
       authToken: process.env.SENTRY_AUTH_TOKEN,
