@@ -29,7 +29,6 @@ export function EditGallery() {
   const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', galleryId],
     queryFn: () => get('/galleries/' + galleryId),
-    fallbackValue: null,
   });
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);

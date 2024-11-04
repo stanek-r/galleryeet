@@ -11,7 +11,6 @@ export function Instax() {
   const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', 'instax'],
     queryFn: () => get('/galleries/instax'),
-    fallbackValue: null,
   });
   const [error, setError] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);

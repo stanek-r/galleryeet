@@ -32,7 +32,6 @@ export function EditPost() {
   const { data, wrapperProps, refetch } = useQuery<GalleryeetFullPostDto | null>({
     queryKey: ['galleryeet', 'posts', postId],
     queryFn: () => get('/posts/' + postId),
-    fallbackValue: null,
   });
   const navigate = useNavigate();
 

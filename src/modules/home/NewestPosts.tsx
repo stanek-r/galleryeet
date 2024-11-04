@@ -10,7 +10,6 @@ export function NewestPosts() {
   const { data, wrapperProps } = useQuery<GalleryeetPostDto[]>({
     queryKey: ['galleryeet', 'posts'],
     queryFn: () => get('/posts'),
-    fallbackValue: [],
   });
   const { isOverBreakpoint } = useBreakpoint('lg');
 

@@ -10,7 +10,6 @@ export function Galleries() {
   const { data, wrapperProps } = useQuery<GalleryeetGalleryDto[]>({
     queryKey: ['galleryeet', 'galleries'],
     queryFn: () => get('/galleries'),
-    fallbackValue: [],
   });
   const navigate = useNavigate();
   const galleries = useMemo(() => {

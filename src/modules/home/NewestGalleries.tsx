@@ -18,7 +18,6 @@ export function NewestGalleries() {
   const { data, wrapperProps } = useQuery<GalleryeetGalleryDto[]>({
     queryKey: ['galleryeet', 'galleries'],
     queryFn: () => get('/galleries'),
-    fallbackValue: [],
   });
   const { isOverBreakpoint } = useBreakpoint('lg');
 

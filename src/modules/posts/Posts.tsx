@@ -10,7 +10,6 @@ export function Posts() {
   const { data, wrapperProps } = useQuery<GalleryeetPostDto[]>({
     queryKey: ['galleryeet', 'posts'],
     queryFn: () => get('/posts'),
-    fallbackValue: [],
   });
   const navigate = useNavigate();
   const posts = useMemo(() => {

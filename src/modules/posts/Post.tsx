@@ -16,7 +16,6 @@ export function Post() {
   const { data, wrapperProps } = useQuery<GalleryeetFullPostDto | null>({
     queryKey: ['galleryeet', 'posts', postId],
     queryFn: () => get('/posts/' + postId),
-    fallbackValue: null,
   });
 
   const contents: (string | GalleryeetContentDto[])[] = useMemo(() => {

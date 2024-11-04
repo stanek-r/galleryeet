@@ -10,7 +10,6 @@ export function Instax() {
   const { data, wrapperProps } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', 'instax'],
     queryFn: () => get('/galleries/instax'),
-    fallbackValue: null,
   });
   const contents = useMemo(() => {
     if (data == null) {

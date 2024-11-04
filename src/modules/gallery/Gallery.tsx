@@ -11,7 +11,6 @@ export function Gallery() {
   const { data, wrapperProps } = useQuery<GalleryeetFullGalleryDto | null>({
     queryKey: ['galleryeet', 'galleries', galleryId],
     queryFn: () => get('/galleries/' + galleryId),
-    fallbackValue: null,
   });
   const contents = useMemo(() => {
     if (data == null) {
