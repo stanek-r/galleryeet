@@ -30,7 +30,7 @@ export function EditPost() {
   const { t } = useTranslation('galleryeet');
   const { postId } = useParams();
   const { put, get, post, delete: deleteRequest } = useRequest();
-  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullPostDto | null>({
+  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullPostDto>({
     queryKey: ['galleryeet', 'posts', postId],
     queryFn: () => get('/posts/' + postId),
   });

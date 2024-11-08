@@ -13,7 +13,7 @@ export function Post() {
   const { t } = useTranslation('galleryeet');
   const { postId } = useParams();
   const { get } = useRequest();
-  const { data, wrapperProps } = useQuery<GalleryeetFullPostDto | null>({
+  const { data, wrapperProps } = useQuery<GalleryeetFullPostDto>({
     queryKey: ['galleryeet', 'posts', postId],
     queryFn: () => get('/posts/' + postId),
   });

@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 export function Instax() {
   const { t } = useTranslation('galleryeet');
   const { get } = useRequest();
-  const { data, wrapperProps } = useQuery<GalleryeetFullGalleryDto | null>({
+  const { data, wrapperProps } = useQuery<GalleryeetFullGalleryDto>({
     queryKey: ['galleryeet', 'galleries', 'instax'],
     queryFn: () => get('/galleries/instax'),
   });

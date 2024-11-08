@@ -13,6 +13,9 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
+        entryFileNames: 'assets/index-[hash].js',
+        chunkFileNames: 'assets/chunk-[hash].js',
+        assetFileNames: 'assets/asset-[hash].[ext]',
         manualChunks: {
           sentry: ['@sentry/react'],
           'google-oauth': ['@react-oauth/google'],

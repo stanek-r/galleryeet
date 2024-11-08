@@ -8,7 +8,7 @@ export function Gallery() {
   const { t } = useTranslation('galleryeet');
   const { galleryId } = useParams();
   const { get } = useRequest();
-  const { data, wrapperProps } = useQuery<GalleryeetFullGalleryDto | null>({
+  const { data, wrapperProps } = useQuery<GalleryeetFullGalleryDto>({
     queryKey: ['galleryeet', 'galleries', galleryId],
     queryFn: () => get('/galleries/' + galleryId),
   });

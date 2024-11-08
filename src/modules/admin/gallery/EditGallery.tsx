@@ -27,7 +27,7 @@ export function EditGallery() {
   const { t } = useTranslation('galleryeet');
   const { galleryId } = useParams();
   const { get, post, delete: deleteRequest, put } = useRequest();
-  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
+  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto>({
     queryKey: ['galleryeet', 'galleries', galleryId],
     queryFn: () => get('/galleries/' + galleryId),
   });

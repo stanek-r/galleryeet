@@ -8,7 +8,7 @@ import { AddPhoto } from './AddPhoto';
 export function Instax() {
   const { t } = useTranslation('galleryeet');
   const { get, delete: deleteRequest, post } = useRequest();
-  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto | null>({
+  const { data, wrapperProps, refetch } = useQuery<GalleryeetFullGalleryDto>({
     queryKey: ['galleryeet', 'galleries', 'instax'],
     queryFn: () => get('/galleries/instax'),
   });

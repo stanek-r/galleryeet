@@ -1,16 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './modules/home/HomePage';
 import {
-  BASE_PROFILE_ROUTE,
+  ColumnPage,
   GoogleAnalyticsProvider,
   GTomyProvider,
+  LazyPage,
   LoginPage,
-  NOT_FOUND_ROUTE,
-  PRIVACY_POLICY_ROUTE,
+  NotFoundPage,
+  PrivacyPolicyPage,
+  ProfilePage,
   RegisterPage,
-  withColumnPage,
-  withLazyPage,
-  withRequireAuth,
+  RequireAuth,
 } from 'gtomy-lib';
 import { GalleryeetMenu } from './components/GalleryeetMenu';
 import { GalleryeetFooter } from './components/GalleryeetFooter';
@@ -26,16 +26,39 @@ function App() {
     <GTomyProvider MenuComponent={GalleryeetMenu} FooterComponent={GalleryeetFooter} displayCookies>
       <GoogleAnalyticsProvider />
       <Routes>
-        <Route path="/" element={withColumnPage(HomePage)} />
-        <Route path="/gallery/*" element={withLazyPage(GalleryModule)} />
-        <Route path="/posts/*" element={withLazyPage(PostsModule)} />
-        <Route path="/instax/*" element={withLazyPage(InstaxModule)} />
-        <Route path="/admin/*" element={withRequireAuth(withLazyPage(AdminModule), 'owner')} />
+        <Route
+          path="/"
+          element={
+            <ColumnPage>
+              <HomePage />
+            </ColumnPage>
+          }
+        />
+        <Route path="/gallery/*" element={<LazyPage Component={GalleryModule} />} />
+        <Route path="/posts/*" element={<LazyPage Component={PostsModule} />} />
+        <Route path="/instax/*" element={<LazyPage Component={InstaxModule} />} />
+        <Route
+          path="/admin/*"
+          element={
+            <RequireAuth minimalRole="owner">
+              <LazyPage Component={AdminModule} />
+            </RequireAuth>
+          }
+        />
+
         <Route path="/login" element={<LoginPage showLanguage />} />
         <Route path="/register" element={<RegisterPage showLanguage />} />
-        {BASE_PROFILE_ROUTE}
-        {PRIVACY_POLICY_ROUTE}
-        {NOT_FOUND_ROUTE}
+
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth minimalRole="user">
+              <ProfilePage />
+            </RequireAuth>
+          }
+        />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </GTomyProvider>
   );
