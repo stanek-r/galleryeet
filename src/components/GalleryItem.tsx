@@ -42,7 +42,8 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
         openYoutubeContent();
         return;
       }
-      window.open(config.cloudFlareImagesUrl + content.imageId, '_blank');
+      const src = `${config.cloudFlareImagesUrl}/${content.imageId}`;
+      window.open(`${src}/original`, '_blank', 'noreferer');
     },
     [config, content]
   );
