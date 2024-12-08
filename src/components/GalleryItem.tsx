@@ -1,7 +1,7 @@
-import { CloudflareImage, DialogElement, Typography, useImageDialog } from 'gtomy-lib';
+import { CloudflareImage, config, DialogElement, Typography, useImageDialog } from 'gtomy-lib';
 import { GalleryeetContentDto, GalleryeetFullContentDto } from '../models/content.dto';
 import { twMerge } from 'tailwind-merge';
-import { useCallback } from 'react';
+import { MouseEventHandler, useCallback } from 'react';
 
 export interface GalleryItemProps {
   content: GalleryeetFullContentDto | GalleryeetContentDto;
@@ -18,13 +18,34 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
     effect: 'blur',
   });
 
-  const onClick = useCallback(() => {
+  const openYoutubeContent: VoidFunction = useCallback(() => {
+    window.open('https://www.youtube.com/watch?v=' + content.videoId, '_blank');
+  }, [content]);
+
+  const onClick: MouseEventHandler<HTMLImageElement> = useCallback(() => {
     if (content.isYoutube) {
-      window.open('https://www.youtube.com/watch?v=' + content.videoId, '_blank');
+      openYoutubeContent();
     } else {
       openDialog();
     }
   }, [openDialog, content]);
+
+  const onAuxClick: MouseEventHandler<HTMLImageElement> = useCallback(
+    (event) => {
+      if (config.cloudFlareImagesUrl == null) {
+        return;
+      }
+      if (event.button !== 1) {
+        return;
+      }
+      if (content.isYoutube) {
+        openYoutubeContent();
+        return;
+      }
+      window.open(config.cloudFlareImagesUrl + content.imageId, '_blank');
+    },
+    [config, content]
+  );
 
   return (
     <div
@@ -47,6 +68,7 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
             !disableHeightLimit && (showTitle ? 'h-[332px]' : 'h-[368px]')
           )}
           onClick={onClick}
+          onAuxClick={onAuxClick}
           srcType="miniature"
         />
       )}
