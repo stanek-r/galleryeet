@@ -12,7 +12,7 @@ import {
   useBlobstorage,
   useRequest,
 } from 'gtomy-lib';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../../models/content.dto';
 import { useState } from 'react';
 
@@ -31,7 +31,7 @@ export interface CreateContentDialogProps extends BaseDialogProps {
 export function CreateContentDialog({ onCreateContent, ...props }: CreateContentDialogProps) {
   const { post } = useRequest();
   const { uploadImage } = useBlobstorage();
-  const { handleSubmit, watch, control } = useForm<CreateContentForm>({
+  const { handleSubmit, control } = useForm<CreateContentForm>({
     defaultValues: {
       title: null,
       photo: null,
@@ -44,8 +44,11 @@ export function CreateContentDialog({ onCreateContent, ...props }: CreateContent
   const [error, setError] = useState<any>(null);
   const { onOpenChange } = props;
 
-  const isVideo = watch('isVideo');
-  const isYoutube = watch('isYoutube');
+  const isVideo = useWatch({
+    control,
+    name: 'isVideo',
+  });
+  const isYoutube = useWatch({ control, name: 'isYoutube' });
 
   const onSubmit = async (form: CreateContentForm) => {
     setSubmitting(true);

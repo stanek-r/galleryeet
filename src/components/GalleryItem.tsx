@@ -28,7 +28,7 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
     } else {
       openDialog();
     }
-  }, [openDialog, content]);
+  }, [openDialog, openYoutubeContent, content]);
 
   const onAuxClick: MouseEventHandler<HTMLImageElement> = useCallback(
     (event) => {
@@ -45,7 +45,7 @@ export function GalleryItem({ content, showTitle, size = 'normal', disableHeight
       const src = `${config.cloudFlareImagesUrl}/${content.imageId}`;
       window.open(`${src}/original`, '_blank', 'noreferer');
     },
-    [config, content]
+    [content, openYoutubeContent]
   );
 
   return (

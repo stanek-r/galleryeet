@@ -14,7 +14,7 @@ import {
   useTranslation,
 } from 'gtomy-lib';
 import { Link, useNavigate } from 'react-router-dom';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { useCallback, useState } from 'react';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../../models/content.dto';
 import { GalleryeetCreatePostDto, GalleryeetPostDto } from '../../../models/post.dto';
@@ -30,7 +30,7 @@ interface CreatePostForm {
 
 export function CreatePost() {
   const { t } = useTranslation('galleryeet');
-  const { handleSubmit, control, watch } = useForm<CreatePostForm>({
+  const { handleSubmit, control } = useForm<CreatePostForm>({
     defaultValues: {
       title: null,
       content: null,
@@ -48,7 +48,7 @@ export function CreatePost() {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
-  const contents = watch('contents');
+  const contents = useWatch({ control, name: 'contents' });
 
   const { openDialog, dialogElementProps } = useDialog((props) => (
     <CreateContentDialog onCreateContent={(content) => append(content)} {...props} />

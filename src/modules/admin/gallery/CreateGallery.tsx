@@ -11,7 +11,7 @@ import {
   useRequest,
   useTranslation,
 } from 'gtomy-lib';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { GalleryeetContentDto, GalleryeetCreateContentDto } from '../../../models/content.dto';
 import { GalleryeetCreateGalleryDto, GalleryeetGalleryDto } from '../../../models/gallery.dto';
 import { useState } from 'react';
@@ -26,7 +26,7 @@ interface CreateGalleryForm {
 
 export function CreateGallery() {
   const { t } = useTranslation('galleryeet');
-  const { handleSubmit, watch, control } = useForm<CreateGalleryForm>({
+  const { handleSubmit, control } = useForm<CreateGalleryForm>({
     defaultValues: {
       contents: null,
       title: null,
@@ -41,7 +41,10 @@ export function CreateGallery() {
   const [uploadCount, setUploadCount] = useState<number>(0);
   const [totalUploadCount, setTotalUploadCount] = useState<number>(0);
 
-  const files = watch('contents.file');
+  const files = useWatch({
+    control,
+    name: 'contents.file',
+  });
 
   const onSubmit = async (form: CreateGalleryForm) => {
     setSubmitting(true);
