@@ -12,7 +12,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 initGTomyLib({
   appName: 'galleryeet',
   appDisplayName: 'GallerYeet',
-  authUrl: 'https://auth.gtomy.net',
+  authUrl: 'https://legacy-auth.gtomy.net',
   storageUrl: 'https://services.gtomy.net/storage',
   backendUrl: 'https://services.gtomy.net/other/galleryeet',
   sentryConfig: {
