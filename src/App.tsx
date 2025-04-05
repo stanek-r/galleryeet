@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './modules/home/HomePage';
 import {
   ColumnPage,
-  GoogleAnalyticsProvider,
   GTomyProvider,
   LazyPage,
   LoginPage,
@@ -24,7 +23,6 @@ const AdminModule = lazy(() => import('./modules/admin/AdminModule'));
 function App() {
   return (
     <GTomyProvider MenuComponent={GalleryeetMenu} FooterComponent={GalleryeetFooter} displayCookies>
-      <GoogleAnalyticsProvider />
       <Routes>
         <Route
           path="/"
