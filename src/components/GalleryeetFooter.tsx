@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 const PROJECTS = [
   { name: 'GTomy.net', link: 'https://gtomy.net' },
-  // { name: 'Ikki AI', link: 'https://ikki-ai.net' },
-  { name: 'Mythicraft', link: 'https://mythicraft.net' },
-  // { name: 'SWITch', link: 'https://swit-ch.live' },
+  { name: 'Mythranel', link: 'https://mythranel.net' },
 ];
 
 export function GalleryeetFooter() {
