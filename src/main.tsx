@@ -5,6 +5,7 @@ import { addTranslationResources, initGTomyLib } from 'gtomy-lib';
 import { version } from '../package.json';
 import { CS } from './locales/cs';
 import { EN } from './locales/en';
+import Clarity from '@microsoft/clarity';
 
 import './main.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -29,6 +30,11 @@ initGTomyLib({
 });
 
 addTranslationResources('galleryeet', { cs: CS, en: EN });
+
+const clarityProjectId = import.meta.env.VITE_MICROSOFT_CLARITY_PROJECT_ID;
+if (clarityProjectId) {
+  Clarity.init(import.meta.env.VITE_MICROSOFT_CLARITY_PROJECT_ID);
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
