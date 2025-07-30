@@ -19,7 +19,7 @@ export default defineConfig({
         manualChunks: {
           sentry: ['@sentry/react'],
           'google-oauth': ['@react-oauth/google'],
-          'react-ga4': ['react-ga4'],
+          // 'react-ga4': ['react-ga4'],
         },
       },
     },
